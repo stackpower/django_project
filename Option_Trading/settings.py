@@ -25,7 +25,7 @@ SECRET_KEY = '^=223m#13*&o57-tg8jh3&1n+z-2b54$sl9qjamoc&st34!wk_'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['optionpairs.com', '167.86.116.208', '127.0.0.1']
+ALLOWED_HOSTS = ['optionpairs.com', '5.189.157.101', '127.0.0.1']
 
 
 # Application definition
