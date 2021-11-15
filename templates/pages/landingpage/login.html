@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<!-- Fonts -->
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600%7CRoboto:400,400i,500,700" rel="stylesheet">
+
+	{% load staticfiles %}
+
+	<link rel="stylesheet" href="{% static 'landingpage/css/themify-icons.css' %}">
+	<link rel="stylesheet" href="{% static 'landingpage/css/cryptocoins.css' %}">
+	<link rel="stylesheet" href="{% static 'landingpage/css/cryptocoins-colors.css' %}">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="{% static 'landingpage/css/bootstrap-reboot.min.css' %}">
+	<link rel="stylesheet" href="{% static 'landingpage/css/bootstrap-grid.min.css' %}">
+	<link rel="stylesheet" href="{% static 'landingpage/css/owl.carousel.min.css' %}">
+	<link rel="stylesheet" href="{% static 'landingpage/css/magnific-popup.css' %}">
+	<link rel="stylesheet" href="{% static 'landingpage/css/main-color1.css' %}">
+
+    <link rel="stylesheet" href="{% static 'user/assets/bootstrap/dist/css/bootstrap.min.css' %}" type="text/css" />
+    <link rel="stylesheet" href="{% static 'user/assets/styles/app.css' %}" type="text/css" />
+    <link rel="stylesheet" href="{% static 'user/assets/styles/new_defined.css' %}" type="text/css" />
+
+    {% comment %}<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">{% endcomment %}
+
+	<!-- Favicons -->
+	<link rel="icon" type="image/png" href="{% static 'landingpage/icon/favicon-32x32.png' %}" sizes="32x32">
+	<link rel="apple-touch-icon" href="{% static 'landingpage/icon/favicon-32x32.png' %}">
+	<link rel="apple-touch-icon" sizes="72x72" href="{% static 'landingpage/icon/apple-touch-icon-72x72.png' %}">
+	<link rel="apple-touch-icon" sizes="114x114" href="{% static 'landingpage/icon/apple-touch-icon-114x114.png' %}">
+	<link rel="apple-touch-icon" sizes="144x144" href="{% static 'landingpage/icon/apple-touch-icon-144x144.png' %}">
+
+    <!-- Google reCaptcha-->
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
+    <meta name="robots" content="noindex" />
+    <meta name="googlebot" content="noindex, nofollow" />
+    <meta name="googlebot-news" content="nosnippet">
+
+	<meta name="description" content="Automated Cryptocurrency trading bot">
+	<meta name="keywords" content="trade, bot, robot, crypto, trading, ea, autotrading, bitcoin">
+	
+	<title>Login - OptionPairs.com</title>
+
+</head>
+<body class="" style="background-color: #292b2c">
+	
+	<!-- sign form -->
+	<div class="sign" style="background-color: #292b2c">
+		<!-- particles -->
+		<div id="particles-js" class="sign__particles"></div>
+		<!-- end particles -->
+
+		<div class="sign__content" style="background-color: #292b2c">
+			<!-- form -->
+			<form id="login_action" action="{% url 'login_account' %}" class="sign__form" method="post" style="background-color: #292b2c; border: 1px solid #0cc2aa">{% csrf_token %}
+				<a href="/login"><img class="sign__logo" style="height:45px;" src="{% static 'landingpage/img/logo.png' %}" alt=""></a>
+
+				{% comment %}<input type="text" class="form__input" name="email" placeholder="Email">{% endcomment %}
+                <div class="md-form-group float-label col-sm-8">
+                    <input type="text" class="md-input " name="user_name">
+                    <label>User Name</label>
+                </div>
+                {% comment %}<input type="text" class="md-input" name="email" placeholder="Email">{% endcomment %}
+				{% comment %}<input type="password" class="form__input" name="password" placeholder="Password">{% endcomment %}
+                <div class="md-form-group float-label col-sm-8">
+                    <input type="password" class="md-input" name="password">
+                    <label>Password</label>
+                </div>
+                {% comment %}<input type="password" class="md-input" name="password" placeholder="Password">{% endcomment %}
+                {% comment %}<div class="g-recaptcha" data-theme="dark" data-sitekey="6LdtfFoUAAAAANHRZjywpBBIL8oGtYuUeABBgkQq"></div><br>{% endcomment %}
+                {% comment %}<div class="g-recaptcha" data-sitekey="6Ld7aV0UAAAAADD3O84N4K4azpoprsVQb8xHP2qD"></div><br>{% endcomment %}
+                {% comment %}<div class="g-recaptcha" data-theme="dark" data-sitekey="6Lf-z28UAAAAAGYN1DwyxIp0lMqVbFNlgr8rV2lE"></div><br>{% endcomment %}
+                <button class="btn btn-outline b-primary text-primary" type="submit">Log In</button>
+                {% comment %}<button class="btn btn-outline b-warn text-warn g-recaptcha" style="width: 100px; height: 40px; font-size: 16px; text-transform: none" data-sitekey="6Lf-z28UAAAAAGYN1DwyxIp0lMqVbFNlgr8rV2lE" data-callback="onSubmit">Log In</button>{% endcomment %}
+                <p style="color: rgb(255,0,0)">{{ login_error }}</p>
+            </form>
+
+		</div>
+	</div>
+	<!-- end sign form -->
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+	<!--<script src="{% static 'landingpage/js/jquery-3.2.1.slim.min.js' %}"></script> -->
+	<script src="{% static 'landingpage/js/bootstrap.bundle.min.js' %}"></script>
+	<script src="{% static 'landingpage/js/owl.carousel.min.js' %}"></script>
+	<script src="{% static 'landingpage/js/smooth-scroll.min.js' %}"></script>
+	<script src="{% static 'landingpage/js/jquery.magnific-popup.min.js' %}"></script>
+	<script src="{% static 'landingpage/js/particles.min.js' %}"></script>
+	<script src="{% static 'landingpage/js/particles-app.js' %}"></script>
+	<script src="{% static 'landingpage/js/main.js' %}"></script>
+
+<!-- core -->
+  <script src="../static/user/libs/jquery/underscore/underscore-min.js"></script>
+  <script src="../static/user/libs/jquery/jQuery-Storage-API/jquery.storageapi.min.js"></script>
+  <script src="../static/user/libs/jquery/PACE/pace.min.js"></script>
+
+  <script src="../static/user/scripts/config.lazyload.js"></script>
+
+  <script src="../static/user/scripts/palette.js"></script>
+  <script src="../static/user/scripts/ui-load.js"></script>
+  <script src="../static/user/scripts/ui-jp.js"></script>
+  <script src="../static/user/scripts/ui-include.js"></script>
+  <script src="../static/user/scripts/ui-device.js"></script>
+  <script src="../static/user/scripts/ui-form.js"></script>
+  <script src="../static/user/scripts/ui-nav.js"></script>
+  <script src="../static/user/scripts/ui-screenfull.js"></script>
+  <script src="../static/user/scripts/ui-scroll-to.js"></script>
+  <script src="../static/user/scripts/ui-toggle-class.js"></script>
+
+  <script src="../static/user/scripts/app.js"></script>
+
+<script>
+    $(document).ready(function(){
+        $('#forget_password').on('click', function(e){
+            e.preventDefault();
+            var csrf_token = $('input[name=csrfmiddlewaretoken]').val();
+            $.ajax({
+                method: "POST",
+                url: "/forget_password/",
+                data: {csrfmiddlewaretoken: csrf_token},
+            });
+        });
+    });
+
+</script>
+<script>
+    function onSubmit() {
+       $('#login_action') .submit();
+    }
+</script>
+</body>
+</html>

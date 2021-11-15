@@ -1,0 +1,4 @@
+{
+	"source": "XNYS",
+	"ticker": "CIB,EC,AVAL,FECCF,TGLS"
+}

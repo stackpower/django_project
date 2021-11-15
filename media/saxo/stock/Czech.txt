@@ -1,0 +1,4 @@
+{
+	"source": "XPRA",
+	"ticker": "CETV,CEZ,VIG,KOFOL,ERBAG,KOMB,MONET,TELEC,PEGAS,TABAK,TMR,STOCK"
+}

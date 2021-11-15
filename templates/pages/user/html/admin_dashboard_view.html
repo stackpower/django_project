@@ -1,0 +1,2281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Analytical Option Navigator</title>
+  <meta name="description" content="Admin, Dashboard, Bootstrap, Bootstrap 4, Angular, AngularJS" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimal-ui" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  {% load staticfiles %}
+
+  <!-- for ios 7 style, multi-resolution icon of 152x152 -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-barstyle" content="black-translucent">
+  <link rel="apple-touch-icon" href="{% static 'user/assets/images/logo.png' %}">
+  <meta name="apple-mobile-web-app-title" content="Flatkit">
+  <!-- for Chrome on Android, multi-resolution icon of 196x196 -->
+  <meta name="mobile-web-app-capable" content="yes">
+  {% comment %}<link rel="shortcut icon" sizes="196x196" href="{% static 'user/assets/images/logo.png' %}">{% endcomment %}
+  <link rel="icon" type="image/png" href="{% static 'landingpage/icon/favicon-32x32.png' %}" sizes="32x32">
+  <link rel="apple-touch-icon" href="{% static 'landingpage/icon/favicon-32x32.png' %}">
+  <!-- style -->
+  <link rel="stylesheet" href="{% static 'user/assets/animate.css/animate.min.css' %}" type="text/css" />
+  <link rel="stylesheet" href="{% static 'user/assets/glyphicons/glyphicons.css' %}" type="text/css" />
+  <link rel="stylesheet" href="{% static 'user/assets/font-awesome/css/font-awesome.min.css' %}" type="text/css" />
+  <link rel="stylesheet" href="{% static 'user/assets/material-design-icons/material-design-icons.css' %}" type="text/css" />
+
+  <link rel="stylesheet" href="{% static 'user/assets/bootstrap/dist/css/bootstrap.min.css' %}" type="text/css" />
+  <!-- build:css ../assets/styles/app.min.css -->
+  <link rel="stylesheet" href="{% static 'user/assets/styles/app.css' %}" type="text/css" />
+  <!-- endbuild -->
+  <link rel="stylesheet" href="{% static 'user/assets/styles/font.css' %}" type="text/css" />
+  <!-- new defined style-->
+  <link rel="stylesheet" href="../static/user/assets/styles/new_defined.css" type="text/css" />
+
+  <link rel="stylesheet" href="../static/user/assets/styles/multiselect.css" type="text/css" />
+  <script src="../static/user/libs/new_defined/multiselect.js"></script>
+</head>
+<body class="dark">
+  <div class="app" id="app">
+
+<!-- ############ LAYOUT START-->
+
+  <!-- aside -->
+  <div id="aside" class="app-aside modal nav-dropdown">
+  	<!-- fluid app aside -->
+    <div class="left navside dark dk" data-layout="column">
+  	  <div class="navbar no-radius">
+        <!-- brand -->
+        <a class="navbar-brand">
+        	{% comment %}<div ui-include="'../static/user/assets/images/logo.svg'"></div>{% endcomment %}
+        	<img src="../static/landingpage/img/title.png" alt="." >
+        	{% comment %}<span class="hidden-folded inline">Site Name</span>{% endcomment %}
+        </a>
+        <!-- / brand -->
+      </div>
+      <div class="hide-scroll" data-flex>
+          <nav class="scroll nav-light">
+              <ul class="nav" ui-nav>
+                {% comment %}<li class="nav-header hidden-folded">
+                  <small class="text-muted">Main</small>
+                </li>{% endcomment %}
+      <!-- Dashboard -->
+                <li>
+                  <a href={% url 'admin_dashboard' id='all'%} >
+                    <div class="row">
+                      <span class="nav-icon fa fa-dashboard" style="margin-left: 10px">
+                      </span>
+                      <span class="nav-text">Security List</span>
+                    </div>
+                  </a>
+                </li>
+      <!-- Users -->
+                <li>
+                  <a href="/admin_user_setting">
+                    <div class="row">
+                      <span class="nav-icon fa fa-users" style="margin-left: 10px">
+                      </span>
+                      <span class="nav-text">Users</span>
+                    </div>
+                  </a>
+                </li>
+      <!-- Account Setting -->
+                <li>
+                  <a href="/admin_account_setting">
+                    <div class="row">
+                      <span class="nav-icon fa fa-database" style="margin-left: 10px">
+                      </span>
+                      <span class="nav-text">Account Settings</span>
+                    </div>
+                  </a>
+                </li>
+      {% comment %}<!-- strategy -->
+                <li>
+                  <a href="/strategy_book">
+                    <div class="row">
+                      <span class="nav-icon fa fa-database" style="margin-left: 10px">
+                      </span>
+                      <span class="nav-text">Strategy Settings</span>
+                    </div>
+                  </a>
+                </li>
+      <!-- Reporting -->
+                <li>
+                  <a href="/reporting">
+                    <div class="row">
+                      <span class="nav-icon fa fa-bars" style="margin-left: 10px">
+                      </span>
+                      <span class="nav-text">Reporting</span>
+                    </div>
+                  </a>
+                </li>
+      <!-- Subscription -->
+                <li>
+                  <a href="/trading">
+                    <div class="row">
+                      <span class="nav-icon fa fa-tags" style="margin-left: 10px">
+                      </span>
+                      <span class="nav-text">Subscription Plan</span>
+                    </div>
+                  </a>
+                </li>
+      <!-- Payment -->
+                <li>
+                  <a href="/history">
+                    <div class="row">
+                      <span class="nav-icon fa fa-money" style="margin-left: 10px">
+                      </span>
+                      <span class="nav-text">Payment Gateway</span>
+                    </div>
+                  </a>
+                </li>
+      <!-- Exchange information -->
+                <li>
+                  <a href="/exchange_info">
+                    <div class="row">
+                      <span class="nav-icon fa fa-key" style="margin-left: 10px">
+                      </span>
+                      <span class="nav-text">Exchange</span>
+                    </div>
+                  </a>
+                </li>
+      <!-- Affiliate -->
+                <li>
+                  <a href="/user_setting">
+                    <div class="row">
+                      <span class="nav-icon fa fa-ticket" style="margin-left: 10px">
+                      </span>
+                      <span class="nav-text">Affiiate</span>
+                    </div>
+                  </a>
+                </li>
+      <!-- Email templates -->
+                <li>
+                  <a href="/user_setting">
+                    <div class="row">
+                      <span class="nav-icon fa fa-envelope" style="margin-left: 10px">
+                      </span>
+                      <span class="nav-text">Email Templates</span>
+                    </div>
+                  </a>
+                </li>
+      <!-- Logs -->
+                <li>
+                  <a href="/history">
+                    <div class="row">
+                      <span class="nav-icon fa fa-bars" style="margin-left: 10px">
+                      </span>
+                      <span class="nav-text">Logs</span>
+                    </div>
+                  </a>
+                </li>
+      <!-- Landingpage Content -->
+                <li>
+                  <a href="/doc_manage">
+                    <div class="row">
+                      <span class="nav-icon fa fa-sitemap" style="margin-left: 10px">
+                      </span>
+                      <span class="nav-text">Document Manage</span>
+                    </div>
+                  </a>
+                </li>
+      <!-- Languages -->
+                <li>
+                  <a href="/user_setting">
+                    <div class="row">
+                      <span class="nav-icon fa fa-language" style="margin-left: 10px">
+                      </span>
+                      <span class="nav-text">Languages</span>
+                    </div>
+                  </a>
+                </li>
+      <!-- Backup -->
+                <li>
+                  <a href="/user_setting">
+                    <div class="row">
+                      <span class="nav-icon fa fa-database" style="margin-left: 10px">
+                      </span>
+                      <span class="nav-text">Backup</span>
+                    </div>
+                  </a>
+                </li>{% endcomment %}
+              </ul>
+          </nav>
+      </div>
+      {% comment %}<div class="b-t">
+        <div class="nav-fold">
+        	<a href="profile.html">
+        	    <span class="pull-left">
+        	      <img src="{% static 'user/assets/images/a0.jpg' %}" alt="..." class="w-40 img-circle">
+        	    </span>
+        	    <span class="clear hidden-folded p-x">
+        	      <span class="block _500">Jean Reyes</span>
+        	      <small class="block text-muted"><i class="fa fa-circle text-success m-r-sm"></i>online</small>
+        	    </span>
+        	</a>
+        </div>
+      </div>{% endcomment %}
+    </div>
+  </div>
+  <!-- / -->
+
+  <!-- content -->
+  <div id="content" class="app-content box-shadow-z0" role="main">
+    <div class="app-header white box-shadow">
+        <div class="p-a white lt box-shadow">
+            <div class="row">
+		        <div class="col-sm-3 row">
+                    <div class="m-t-sm col-sm-4">
+                        <h4 class="text-right">Security:</h4>
+                    </div>
+                    <div class="col-sm-4 ">
+                        <select required name="security_list" id="security_list" style="background-color: rgb(72,87,103); font-size: 20px" class="form-control">
+                        {% for item in security_list %}
+                            <option value="{{ item.id }}">{{ item.name }}</option>
+                        {% endfor %}
+                        </select>
+                    </div>
+		        </div>
+                <div class="col-sm-3">
+                    <div class="m-y-sm">
+                        <h4 >Expire Date: {{ security.expire_date_1 }}</h4>
+                     </div>
+		        </div>
+		        <div class="col-sm-6 text-sm-right">
+			        <div class="m-y-sm">
+				        <h4 >Today: <strong id="today"></strong> (Chicago Time): <span class="text-danger">{{ rest_date }} Days Left</span> </h4>
+	                </div>
+                </div>
+	        </div>
+        </div>
+    </div>
+    <div class="app-footer">
+      <div class="p-2 text-xs">
+        <div class="pull-right text-muted py-1">
+          &copy; <strong>OPTIONPARIS.COM</strong> <span class="hidden-xs-down">- Analytical Option Navigator <img width="20px" height="22px" src="../../../../static/landingpage/icon/heart.png"></span>
+        </div>
+        {% comment %}<div class="nav">
+          <a class="nav-link" href="{% static 'user/' %}">About</a>
+          <a class="nav-link" href="http://themeforest.net/user/flatfull/portfolio?ref=flatfull">Get it</a>
+        </div>{% endcomment %}
+      </div>
+    </div>
+    <div ui-view class="app-body" id="view">
+
+<!-- ############ PAGE START-->
+    <div class="row no-gutter">
+    <div class="col-sm-1 col-lg-1">
+    <div class="p-y">
+      <div class="nav-active-border left b-primary">
+        <ul class="nav nav-sm flex-column">
+          <li class="nav-item">
+              <a class="nav-link block active" href data-toggle="tab" data-target="#tab-2"><h5>Percentile</h5></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link block" href data-toggle="tab" data-target="#tab-1"><h5>Overview</h5></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link block" href data-toggle="tab" data-target="#tab-3"><h5>Options</h5></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link block" href data-toggle="tab" data-target="#tab-4"><h5>Details</h5></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link block" href data-toggle="tab" data-target="#tab-5"><h5>Journal</h5></a>
+          </li>
+
+        </ul>
+      </div>
+
+    </div>
+    </div>
+    <div class="col-sm-11 col-lg-11 light lt">
+    <div class="tab-content pos-rlt">
+      <div class="tab-pane" id="tab-1">
+        <form role="form" action="" method="post" id="overview" class="p-a-md col-md-12">{% csrf_token %}
+          <input type="hidden" id="security_id" name="security_id" value="{{ security.id }}">
+          <div class="box">
+            <div class="box-divider m-0"></div>
+            <div class="box">
+                <div class="box-body">
+                    Search: <input id="filter" type="text" class="form-control input-sm w-auto inline m-r"/>
+                </div>
+                <div>
+                    <table class="table m-b-none" ui-jp="footable" data-filter="#filter" data-page-size="{{ data_length }}">
+                        <thead>
+                            <tr>
+                                <th class="text-info"  style="width:6%">Ticker</th>
+                                <th class="text-danger"  style="width:13%">Straddle Short</th>
+                                <th class="text-primary"  style="width:13%">Straddle Long</th>
+                                <th class="text-primary"  style="width:13%">Vertical Call Maximum</th>
+                                <th class="text-danger"  style="width:13%">Vertical Put Maximum</th>
+                                <th class="text-primary"  style="width:13%">Vertical Call Current</th>
+                                <th class="text-danger"  style="width:13%">Vertical Put Current</th>
+                                <th class="text-info"  style="width:16%">Calendar</th>
+                            </tr>
+                        </thead>
+                        <tbody id="strategy_table">
+                            {% for record in strategy %}
+                            <tr>
+                                <td >{{ record.symbol }}</td>
+                                <td >{{ record.short_straddle }}</td>
+                                <td>{{ record.long_straddle }}</td>
+                                <td>{{ record.call_spread_max }}</td>
+                                <td>{{ record.put_spread_max }}</td>
+                                <td>{{ record.call_spread_cur }}</td>
+                                <td>{{ record.put_spread_cur }}</td>
+                                <td>{{ record.calendar }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                        <tfoot class="hide-if-no-paging">
+                            <tr>
+                                <td colspan="5" class="text-center">
+                                    <ul class="pagination"></ul>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="tab-pane active" id="tab-2">
+        <form role="form" action="{% url 'admin_dashboard' id='filter' %}" method="post" id="percentile_form" class="p-a-md col-md-12">{% csrf_token %}
+          <input type="hidden" id="security_id" name="security_id" value="{{ security.id }}">
+          <div class="box">
+            <div class="box-divider m-0"></div>
+            <div class="box">
+                <div class="box-body">
+                    Search: <input id="filter" type="text" class="form-control input-sm w-auto inline m-r"/>
+                </div>
+                <div>
+                    <table class="table m-b-none" ui-jp="footable" data-filter="#filter" data-page-size="{{ data_length }}">
+                        <thead>
+          <tr>
+            <th class="text-info"  style="width:5%">Symbol</th>
+            <th class="text-info"  style="width:5%">Sector</th>
+            <th class="text-info"  style="width:5%">Last Price</th>
+            <th class="text-info"  style="width:5%">Beta(5Y Monthly)</th>
+            <th class="text-danger"  style="width:5%">Short Min</th>
+            <th class="text-danger"  style="width:5%">Short Max</th>
+            <th class="text-danger"  style="width:5%">Last Bar</th>
+            <th class="text-danger"  style="width:5%">Last Bar in %</th>
+            <th class="text-info"  style="width:6%">Add to</th>
+            <th class="text-warn"  style="width:6%">S/L</th>
+            <th class="text-primary"  style="width:5%">Long Min</th>
+            <th class="text-primary"  style="width:5%">Long Max</th>
+            <th class="text-primary"  style="width:5%">Last Bar</th>
+            <th class="text-primary"  style="width:5%">Last Bar in %</th>
+            <th class="text-info"  style="width:6%">Add to</th>
+          </tr>
+                        </thead>
+                        <tbody id="percentile_table">
+                        {% for record in table_data %}
+                            <tr>
+                                <td style="color:{{ record.symbol.0 }}!important;" title="{{ record.symbol.1 }}">{{ record.symbol.2 }}</td>
+                                <td style="color:{{ record.symbol.0 }}!important;">{{ record.sector }}</td>
+                                <td>{{ record.last_price }}</td>
+                                <td>{{ record.beta }}</td>
+                                <td>{{ record.short_min }}</td>
+                                <td>{{ record.short_max }}</td>
+                                <td>{{ record.short_last }}</td>
+                                <td>{{ record.short_last_percent }}</td>
+                                <td>
+                                    <select class="form-control" style="background-color: rgb(72,87,103);" id="watchlist_{{ security.id }}_{{ record.symbol.2 }}_short" onchange="add_symbol_to_watchlist('{{ security.id }}', '{{ record.symbol.2 }}', 'short')">
+                                        <option value=""></option>
+                                    {% for journal in record.action1 %}
+                                        <option value="{{ journal.0 }}">{{ journal.1 }}</option>
+                                    {% endfor %}
+                                    </select>
+                                </td>
+                                <td>{{ record.s_l }}</td>
+                                <td>{{ record.long_min }}</td>
+                                <td>{{ record.long_max }}</td>
+                                <td>{{ record.long_last }}</td>
+                                <td>{{ record.long_last_percent }}</td>
+                                <td>
+                                    <select class="form-control" style="background-color: rgb(72,87,103);" id="watchlist_{{ security.id }}_{{ record.symbol.2 }}_long" onchange="add_symbol_to_watchlist('{{ security.id }}', '{{ record.symbol.2 }}', 'long')">
+                                        <option value=""></option>
+                                    {% for journal in record.action2 %}
+                                        <option value="{{ journal.0 }}">{{ journal.1 }}</option>
+                                    {% endfor %}
+                                    </select>
+                                </td>
+                            </tr>
+                        {% endfor %}
+
+                        </tbody>
+                        <tfoot class="hide-if-no-paging">
+                            <tr>
+                                <td colspan="5" class="text-center">
+                                    <ul class="pagination"></ul>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="tab-pane" id="tab-3">
+        <div class="p-a-md dker _600">Security: {{ security.name }} Options</div>
+        <form role="form" class="p-a-md col-md-12">
+
+        </form>
+      </div>
+      <div class="tab-pane" id="tab-4">
+        <form class="p-a-md col-md-12">
+          <div class="box">
+            <div class="box-header">
+              <div class="row">
+                  <div class="col-sm-2 text-center"><a class="btn btn-fw primary" href="{{ download_list.price }}" download> Price</a></div>
+                  <div class="col-sm-2 text-center"><a class="btn btn-fw accent" href="{{ download_list.bar }}" download> BARs</a></div>
+                  <div class="col-sm-2 text-center"><a class="btn btn-fw warn" href="{{ download_list.correlation }}" download> Correlation</a></div>
+                  <div class="col-sm-2 text-center"><a class="btn btn-fw success" href="{{ download_list.short_long }}" download> Short&Long</a></div>
+                  <div class="col-sm-2 text-center"><a class="btn btn-fw info" href="{{ download_list.atr }}" download> ATRs</a></div>
+                  <div class="col-sm-2 text-center"><a class="btn btn-fw danger" href="{{ download_list.all }}" download> All</a></div>
+
+              </div>
+            </div>
+
+            <div class="box-divider m-0"></div>
+            <div class="box-body">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group row">
+                            <label class="col-sm-3 form-control-label text-center" >Symbol</label>
+                            <select id="detail_graph_symbol" class="col-sm-9 form-control select2-multiple" multiple  ui-jp="select2" ui-options="{theme: 'bootstrap'}" style="width: 60%">
+                            {% for symbol in symbol_list %}
+                                <option value="{{ symbol }}">{{ symbol }}</option>
+                            {% endfor %}
+                            </select>
+                        </div>
+
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group row">
+                            <label class="col-sm-4 form-control-label text-center">Data Length</label>
+                            <div class="col-sm-8">
+                                <input type="text" id="detail_graph_length" name="detail_graph_length" class="form-control"  required/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3 text-center">
+                        <a class="btn btn-fw primary text-center" href id="detail_graph_display">Display</a>
+                    </div>
+                </div>
+                <div class="text-center" id='loader' style='display: none;'>
+                    <img src='../../../../static/landingpage/img/loader.gif' width='200px' height='200px'>
+                </div>
+                <div class="form-group row" id="detail_graph_form">
+
+                </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="tab-pane" id="tab-5">
+        <form role="form" class="p-a-md col-md-12">
+            <div class="col-sm-12">
+                <div class="b-b b-primary nav-active-primary">
+                    <ul class="nav nav-tabs">
+                        <li class="nav-item">
+                            <a class="nav-link active" href data-toggle="tab" data-target="#tab_journal_watch">Watch List</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link " href data-toggle="tab" data-target="#tab_journal_trading">Positions</a>
+                        </li>
+
+                    </ul>
+                </div>
+                <div class="tab-content p-a m-b-md">
+                    <div class="tab-pane animated fadeIn text-muted active" id="tab_journal_watch">
+                        <div class="box">
+                            <div class="box-header">
+                                <div class="row">
+                                    <div class="col-sm-6 text-center">
+                                        <div class="form-group row">
+                                            <h2 class="col-sm-4 form-control-label" style="text-align: right">Journal List<span>   </span></h2>
+                                            <div class="col-sm-4">
+                                                <select required name="journal_watch_list" id="journal_watch_list" style="background-color: rgb(72,87,103);" class="form-control">
+                                                    {% if journal_list %}
+                                                        {% for item in journal_list %}
+                                                            <option value='{{ item.id }}'>{{ item.name }}</option>
+                                                        {% endfor %}
+                                                    {% endif %}
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2 text-center">
+                                        <a class="btn btn-fw primary" href id="journal_watch_display">View</a>
+                                    </div>
+                                    <div class="col-sm-2 text-center">
+                                        <a class="btn btn-fw danger" href id="journal_watch_delete">Delete</a>
+                                    </div>
+                                    <div class="col-sm-2 text-center">
+                                        <a class="btn btn-fw info" href id="journal_watch_add" data-toggle="modal" data-target="#new_journal">New List</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="box-body">
+                                <div id="journal_watchlist_table" style="display: none">
+                                    <div class="box">
+                                            <div class="box-body">
+                                                Search: <input id="filter" type="text" class="form-control input-sm w-auto inline m-r"/>
+                                            </div>
+                                            <div>
+                                                <table class="table m-b-none" ui-jp="footable" data-filter="#filter" data-page-size="5">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Symbol</th>
+                                                            <th>Side</th>
+                                                            <th>Create Date</th>
+                                                            <th>Expire Date</th>
+                                                            <th>Days Left</th>
+                                                            <th>Max</th>
+                                                            <th>Min</th>
+                                                            <th>$ as 1%</th>
+                                                            <th>Last Bar</th>
+                                                            <th>Last Bar in %</th>
+                                                            <th>View</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="journal_watchlist_tbody">
+
+                                                    </tbody>
+                                                    <tfoot class="hide-if-no-paging">
+                                                        <tr>
+                                                            <td colspan="5" class="text-center">
+                                                                <ul class="pagination"></ul>
+                                                            </td>
+                                                        </tr>
+                                                    </tfoot>
+                                                </table>
+                                            </div>
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane animated fadeIn text-muted " id="tab_journal_trading">
+                        Components
+                    </div>
+                </div>
+            </div>
+        </form>
+      </div>
+    </div>
+  </div>
+    </div>
+<!-- .modal -->
+<div id="new_journal" class="modal black-overlay" data-backdrop="true">
+    <div class="modal-dialog">
+      <div class="modal-content box-shadow-md black lt m-b">
+        <div class="modal-header">
+      	  <h5 class="modal-title">Create New Journal</h5>
+
+        </div>
+        <div class="modal-body p-lg">
+          <form id="add_journal_form" method="post">{% csrf_token %}
+      <!--   Security Name  -->
+            <div class="form-group row">
+              <label class="col-sm-4 form-control-label" style="text-align: right">Name</label>
+              <div class="col-sm-8">
+                <input type="text" id="journal_name" name="journal_name" class="form-control"  required/>
+              </div>
+            </div>
+      <!--  Button  -->
+            <div class="modal-footer">
+              {% comment %}<button type="button" class="btn white p-x-md" style="background-color: #2e3e4e" data-dismiss="modal">Cancel</button>{% endcomment %}
+              <p class="text-primary" id="create_journal_watch_result"></p>
+                <button type="submit" class="btn white p-x-md" style="background-color: #2e3e4e">Add</button>
+
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+<div id="journal_watch_graph" class="modal black-overlay" data-backdrop="true" >
+  <div class="modal-dialog" style="max-width: 80%!important;">
+    <div class="modal-content box-shadow-md black lt m-b">
+      <div class="modal-header">
+          <div class="col-sm-10">
+              <h5 class="modal-title" id="journal_watch_graph_title"></h5>
+          </div>
+          <div class="col-sm-2 text-lg-right">
+              <button id="journal_watch_graph_hide" name="journal_watch_graph_hide" type="button" class="btn white p-x-md" style="background-color: #2e3e4e" >Back</button>
+          </div>
+      </div>
+      <div class="modal-body text-center p-lg" >
+         <div class="row">
+             <div class="col-sm-8" id="journal_watch_graph_price">
+
+             </div>
+             <div class="col-sm-4" id="journal_watch_graph_level">
+
+             </div>
+         </div>
+         <div class="row">
+             <div class="col-sm-8" id="journal_volatility_graph_price">
+
+             </div>
+             <div class="col-sm-4" id="journal_volatility_graph_level">
+
+             </div>
+         </div>
+      </div>
+    </div><!-- /.modal-content -->
+  </div>
+</div>
+<div id="journal_past_graph" class="modal black-overlay" data-backdrop="true" >
+  <div class="modal-dialog" style="max-width: 80%!important;">
+    <div class="modal-content box-shadow-md black lt m-b">
+      <div class="modal-header">
+      	  <div class="col-sm-10">
+              <h5 class="modal-title" id="journal_past_graph_title"></h5>
+          </div>
+          <div class="col-sm-2 text-lg-right">
+              <button id="journal_past_graph_hide" name="journal_past_graph_hide" type="button" class="btn white p-x-md" style="background-color: #2e3e4e" >Back</button>
+          </div>
+
+      </div>
+      <div class="modal-body text-center p-lg" >
+         <div class="row">
+             <div class="col-sm-8" id="journal_past_graph_price">
+
+             </div>
+             <div class="col-sm-4" id="journal_past_graph_level">
+
+             </div>
+         </div>
+         <div class="row">
+             <div class="col-sm-8" id="journal_volatility_past_price">
+
+             </div>
+             <div class="col-sm-4" id="journal_volatility_past_level">
+
+             </div>
+         </div>
+      </div>
+    </div><!-- /.modal-content -->
+  </div>
+</div>
+<div id="movement_chart_form" class="modal black-overlay" data-backdrop="true">
+    <div class="modal-dialog">
+      <div class="modal-content box-shadow-md black lt m-b">
+        <div class="modal-body p-lg" id="movement_chart">
+
+        </div>
+        <div class="modal-footer">
+              <button id="back_to_detail" name="back_to_detail" type="button" class="btn white p-x-md" style="background-color: #2e3e4e" >Back</button>
+        </div>
+      </div>
+    </div>
+  </div>
+<div id="earningsfly_form" class="modal black-overlay" data-backdrop="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content box-shadow-md black lt m-b">
+        <div class="modal-header">
+      	  <div class="col-sm-12 row">
+              <div class="col-sm-10">
+                    <h5 class="modal-title" id="earningsfly_title">US Stock Research Bot (earningsfly.com)</h5>
+              </div>
+              <div class="col-sm-2 text-lg-right">
+                  <button id="hide_earningsfly" name="hide_earningsfly" type="button" class="btn white p-x-md" style="background-color: #2e3e4e" >Back</button>
+              </div>
+
+          </div>
+        </div>
+        <div class="modal-body p-lg" id="earningsfly_body">
+
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- / .modal -->
+
+<!-- ############ PAGE END-->
+
+    </div>
+  </div>
+  <!-- / -->
+
+<!-- ############ LAYOUT END-->
+
+  </div>
+
+<!-- build:js scripts/app.html.js -->
+<!-- jQuery -->
+  <script src="{% static 'user/libs/jquery/jquery/dist/jquery.js' %}"></script>
+
+  <script src="../static/user/libs/new_defined/moment.min.js"></script>
+  <script src="../static/user/libs/new_defined/moment-timezone.min.js"></script>
+  <script src="../static/user/libs/new_defined/moment-timezone-with-data.js"></script>
+<!-- Bootstrap -->
+  <script src="{% static 'user/libs/jquery/tether/dist/js/tether.min.js' %}"></script>
+  <script src="{% static 'user/libs/jquery/bootstrap/dist/js/bootstrap.js' %}"></script>
+<!-- core -->
+  <script src="{% static 'user/libs/jquery/underscore/underscore-min.js' %}"></script>
+  <script src="{% static 'user/libs/jquery/jQuery-Storage-API/jquery.storageapi.min.js' %}"></script>
+  <script src="{% static 'user/libs/jquery/PACE/pace.min.js' %}"></script>
+
+
+  <script src="{% static 'user/scripts/config.lazyload.js' %}"></script>
+
+  <script src="{% static 'user/scripts/palette.js' %}"></script>
+  <script src="{% static 'user/scripts/ui-load.js' %}"></script>
+  <script src="{% static 'user/scripts/ui-jp.js' %}"></script>
+  <script src="{% static 'user/scripts/ui-include.js' %}"></script>
+  <script src="{% static 'user/scripts/ui-device.js' %}"></script>
+  <script src="{% static 'user/scripts/ui-form.js' %}"></script>
+  <script src="{% static 'user/scripts/ui-nav.js' %}"></script>
+  <script src="{% static 'user/scripts/ui-screenfull.js' %}"></script>
+  <script src="{% static 'user/scripts/ui-scroll-to.js' %}"></script>
+  <script src="{% static 'user/scripts/ui-toggle-class.js' %}"></script>
+
+  <script src="{% static 'user/scripts/app.js' %}"></script>
+  {% comment %}<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>{% endcomment %}
+  <!-- ajax -->
+  <script src="{% static 'user/libs/jquery/jquery-pjax/jquery.pjax.js' %}"></script>
+  <script src="{% static 'user/scripts/ajax.js' %}"></script>
+<!-- endbuild -->
+  <script src="https://code.highcharts.com/stock/highstock.js"></script>
+  <script src="https://code.highcharts.com/highcharts.js"></script>
+  <script src="https://code.highcharts.com/modules/exporting.js"></script>
+  <script src="https://code.highcharts.com/modules/export-data.js"></script>
+  <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+
+<script>
+$(document).ready(function(){
+    var interval = setInterval(function() {
+        var momentNow = moment().tz('America/Chicago').format('YYYY-MM-DD HH:mm:ss');
+        $('#today').html(momentNow);
+    }, 100);
+
+    $('#security_list').val($('#security_id').val()).change();
+
+    $('#detail_graph_display').on("click", function(e) {
+          e.preventDefault();
+          $('#detail_price_graph').hide();
+          $('#detail_level_graph').hide();
+          var csrf_token = $('input[name=csrfmiddlewaretoken]').val();
+          var symbol = "";
+          var graph_body = "";
+          var length = $('#detail_graph_length').val();
+          var security_id = $('#security_id').val();
+          $('.select2-selection__choice').each(function(){
+              var temp = $(this).attr("title");
+              if(symbol == "") symbol = temp
+              else symbol += "," + temp;
+              //graph_body += '<div class="form-group"><div class="row"><div class="col-sm-7" id="detail_price_graph_' + temp + '" style="display: none"></div><div class="divider b-2x"></div><div class="col-sm-3" id="detail_level_graph_' + temp + '" style="display: none"></div><div class="divider b-3x"></div><div class="col-sm-2" id="detail_option_price_' + temp + '" style="display: none;background-color: #2e3e4e"></div></div><div class="row"><div class="col-sm-12" id="daily_volatility_graph_' + temp + '" style="display: none;background-color: #2e3e4e"></div></div></div>';
+              var aaa = security_id + ",'" + temp + "'"
+              graph_body += '<div class="col-sm-9">' +
+                  '<div class="row">' +
+                    '<div class="col-sm-8" id="detail_price_graph_' + temp + '" style="display: none"></div>' +
+                    '<div class="divider b-2x"></div>' +
+                    '<div class="col-sm-4" id="detail_level_graph_' + temp + '" style="display: none"></div>' +
+                    '<div class="divider b-3x"></div>' +
+                  '</div>' +
+                  '<div class="row">' +
+                    '<div class="col-sm-8" id="daily_volatility_graph_' + temp + '" style="display: none;background-color: #2e3e4e"></div>' +
+                    '<div class="divider b-2x"></div>' +
+                    '<div class="col-sm-4" id="daily_level_graph_' + temp + '" style="display: none"></div>' +
+                  '</div>' +
+              '</div>' +
+              '<div class="col-sm-3">' +
+                  '<div class="col-sm-12" id="detail_option_price_' + temp + '" style="display: none;background-color: #2e3e4e"></div>' +
+                  '<div id="movement_chart_button_' + temp + '" class="text-center m-b" style="display: none"><a class="btn btn-fw primary" href="#" onclick="display_movement_chart(' + aaa + ')">7 Days Movement Chart</a></div>' +
+                  '<div id="earningsfly_button_' + temp + '" class="text-center m-b" style="display: none"><a class="btn btn-fw info" href="#" onclick="display_earningsfly(' + aaa + ')">Earningsfly Data</a></div>' +
+              '</div>';
+          });
+          $('#detail_graph_form').html(graph_body);
+
+
+          $.ajax({
+              method: "POST",
+              url: "/symbol_detail_graph/",
+              data: {id: security_id, symbol: symbol, length: length, csrfmiddlewaretoken: csrf_token},
+              beforeSend: function() { $("#loader").show();},
+              success: function (result) {
+                  for(var i=0; i<result.result.length; i++){
+                    var ticker = result.result[i]['symbol'];
+                    var long_graph_price_data = result.result[i]['long_graph_price_data'];
+                    //var long_graph_price_per = result.long_graph_price_per;
+                    var short_graph_price_data = result.result[i]['short_graph_price_data'];
+                    var daily_volatility_data = result.result[i]['daily_volatility'];
+                    var graph_price_index = result.result[i]['price_index'];
+                    var long_graph_level = result.result[i]['long_graph_level'];
+                    var short_graph_level = result.result[i]['short_graph_level'];
+                    var long_level_sum = result.result[i]['long_level_sum'];
+                    var short_level_sum = result.result[i]['short_level_sum'];
+                    var daily_graph_level = result.result[i]['daily_graph_level'];
+                    var long_min = result.result[i]['long_min'];
+                    var long_dif = result.result[i]['long_dif'];
+                    var short_min = result.result[i]['short_min'];
+                    var short_dif = result.result[i]['short_dif'];
+                    var daily_min = result.result[i]['daily_min'];
+                    var daily_dif = result.result[i]['daily_dif'];
+                    var correlate_data = result.result[i]['correlate_data'];
+                    $('#loader').hide();
+                    $('#detail_price_graph_' + ticker).show();
+                    detail_price_graph(ticker, long_graph_price_data, short_graph_price_data, graph_price_index, long_min, long_dif, short_min, short_dif);
+                    $('#detail_level_graph_' + ticker).show();
+                    detail_level_graph(ticker, long_graph_level, short_graph_level, long_level_sum, short_level_sum);
+                    $('#daily_volatility_graph_' + ticker).show();
+                    daily_volatility_graph(ticker, daily_volatility_data, graph_price_index, daily_min, daily_dif);
+                    $('#daily_level_graph_' + ticker).show();
+                    daily_level_graph(ticker, daily_graph_level);
+                    var option_body = "";
+                    //if(result.result[i]['option_success'] == "true"){
+                        //var option_price = result.result[i]['option_price'];
+                        //var call_open_interest = result.result[i]['call_open_interest'];
+                        //var put_open_interest = result.result[i]['put_open_interest'];
+                        var stock_price = result.result[i]['stock_price'];
+                        var last_long = result.result[i]['last_long'];
+                        var last_short = result.result[i]['last_short'];
+                        var last_daily_volatility = result.result[i]['last_daily_volatility'];
+                        var history_data = "";
+                        if( result.result[i]['history_data_date_1']){
+                            history_data += '<tr><td>' + result.result[i]['history_data_date_1'] + '</td><td>' + result.result[i]['history_data_price_1'] + '</td></tr>';
+                        };
+                        if( result.result[i]['history_data_date_2']){
+                            history_data += '<tr><td>' + result.result[i]['history_data_date_2'] + '</td><td>' + result.result[i]['history_data_price_2'] + '</td></tr>';
+                        }
+                        //option_body = '<div class="box" style="background-color: #2e3e4e"><div class="box-header"><h2>' + ticker + '  Option Values</h2></div><table class="table table-bordered"><tbody><tr><td>Open Interest(Calls)</td><td>' + call_open_interest + '</td></tr><tr><td>Option Price</td><td>' + option_price + '</td></tr><tr><td>Open Interest(Puts)</td><td>' + put_open_interest + '</td></tr><tr><td>Stock Price</td><td>' + stock_price + '</td></tr><tr><td>Last Short</td><td>' + last_short + '</td></tr><tr><td>Last Long</td><td>' + last_long + '</td></tr><tr><td>Daily Volatility</td><td>' + last_daily_volatility + '</td></tr>' + history_data + '</tbody></table></div>';
+                      option_body = '<div class="box" style="background-color: #2e3e4e"><div class="box-header"><h2 class="text-center">' + ticker + '  Option Values</h2></div><table class="table table-bordered"><tbody><tr><td>High 1</td><td>' + correlate_data[3] + '</td></tr><tr><td>High 2</td><td>' + correlate_data[4] + '</td></tr><tr><td>High 3</td><td>' + correlate_data[5] + '</td></tr><tr><td>Low 1</td><td>' + correlate_data[0] + '</td></tr><tr><td>Low 2</td><td>' + correlate_data[1] + '</td></tr><tr><td>Low 3</td><td>' + correlate_data[2] + '</td></tr><tr><td>Stock Price</td><td>' + stock_price + '</td></tr><tr><td>Last Short</td><td>' + last_short + '</td></tr><tr><td>Last Long</td><td>' + last_long + '</td></tr><tr><td>Daily Volatility</td><td>' + last_daily_volatility + '</td></tr>' + history_data + '</tbody></table></div>';
+                    //}else{
+                    //    option_body = '<div class="p-a-md"><h5>Symbol ' + ticker + ' has no any values at this expiration Date</h5></div>'
+                    //}
+
+                    $('#detail_option_price_' + ticker).html(option_body);
+                    $('#detail_option_price_' + ticker).show();
+                    $('#movement_chart_button_' + ticker).show();
+                    $('#earningsfly_button_' + ticker).show();
+                  }
+                  {% comment %}var long_graph_price_data = result.long_graph_price_data;
+                  //var long_graph_price_per = result.long_graph_price_per;
+                  var short_graph_price_data = result.short_graph_price_data;
+                  //var short_graph_price_per = result.short_graph_price_per;
+                  var graph_price_index = result.price_index;
+                  var long_graph_level = result.long_graph_level;
+                  var short_graph_level = result.short_graph_level;
+                  $('#loader').hide();
+                  $('#detail_price_graph').show();
+                  detail_price_graph(long_graph_price_data, short_graph_price_data, graph_price_index);
+                  $('#detail_level_graph').show();
+                  detail_level_graph(long_graph_level, short_graph_level);{% endcomment %}
+              },
+
+          });
+      });
+
+    $('#add_journal_form').on("submit", function(e){
+        e.preventDefault();
+        //var security_id = $('#security_id').val();
+        var journal_name = $('#journal_name').val();
+        var csrf_token = $('input[name=csrfmiddlewaretoken]').val();
+        $.ajax({
+              method: "POST",
+              url: "/add_journal_watch/",
+              data: {name: journal_name, csrfmiddlewaretoken: csrf_token},
+              success: function (result) {
+                  if(result.result == "success"){
+                      var journal_id = result.id;
+                      //console.log(journal_id);
+                      //$('#new_journal').hide();
+                      $('#create_journal_watch_result').html("Create new Journal list successfully.")
+                      var journal_list_html = $('#journal_watch_list').html();
+                      $('#journal_watch_list').html(journal_list_html + "<option value='" + journal_id + "'>" + journal_name + "</option>");
+
+                      var select_list = $('#percentile_table').find($("select"));
+                      //console.log(select_list);
+                      for(var i=0; i<select_list.length; i++){
+                          //console.log(select_list[i]);
+                          select_list[i].append(new Option(journal_name, journal_id));
+                      }
+
+                  }
+              }
+          });
+    });
+
+    $('#journal_watch_display') .on("click", function (e) {
+        e.preventDefault();
+        var journal_id = $('#journal_watch_list').val();
+        var csrf_token = $('input[name=csrfmiddlewaretoken]').val();
+        $.ajax({
+              method: "POST",
+              url: "/view_journal_watchlist/",
+              data: {journal_id: journal_id, csrfmiddlewaretoken: csrf_token},
+              success: function (result) {
+                  $('#journal_watchlist_table').hide();
+                  if(result.result != []){
+                      var result_data = result.result;
+                      var result_html = ""
+                      for(var i=0; i< result_data.length; i++){
+                          //result_html += '<tr><td>' + result_data[i].symbol + '</td><td>' + result_data[i].side + '</td><td>' +result_data[i].exprie_date+ '</td><td>' +result_data[i].rest_days+ '</td><td>' +result_data[i].max+ '</td><td>' +result_data[i].min+ '</td><td>' +result_data[i].precent_price+ '</td><td>' +result_data[i].last_bar+ '</td><td>' +result_data[i].last_percent+ '</td><td><a class="label info" href onclick="view_journal_graph(\'' +result_data[i].security_id+ '\',\'' +result_data[i].symbol+ '\')">View</a></td></tr>'
+                          console.log(result_data[i][11]);
+                          result_html += '<tr><td>' + result_data[i][1] + '</td><td>' + result_data[i][2] + '</td><td>' +result_data[i][3]+ '</td><td>' +result_data[i][4]+ '</td><td>' +result_data[i][5]+ '</td><td>' +result_data[i][9]+ '</td><td>' +result_data[i][10]+ '</td><td>' +result_data[i][6]+ '</td><td>' +result_data[i][7]+ '</td><td>' +result_data[i][8]+ '</td><td><a class="label primary" onclick="view_journal_graph(\'' +result_data[i][0]+ '\',\'' +result_data[i][1]+ '\')">Current</a><a class="label info" onclick="view_journal_past_graph(\'' + result_data[i][11]+ '\')">Past</a><a class="label danger" onclick="delete_journal_item(\'' + result_data[i][11]+  '\')">Delete</a></td></tr>'
+                      }
+                      $('#journal_watchlist_tbody').html(result_html);
+                      $('#journal_watchlist_table').show();
+
+                  }
+              }
+          });
+    })
+
+    $('#journal_watch_delete') .on("click", function (e) {
+        e.preventDefault();
+        var journal_id = $('#journal_watch_list').val();
+        var csrf_token = $('input[name=csrfmiddlewaretoken]').val();
+        $.ajax({
+              method: "POST",
+              url: "/delete_journal_watchlist/",
+              data: {journal_id: journal_id, csrfmiddlewaretoken: csrf_token},
+              success: function (result) {
+                  $('#journal_watch_list option[value="' + journal_id + '"]').remove();
+                  $('#journal_watchlist_table').hide();
+                  $('#percentile_table option[value="' + journal_id + '"').remove();
+              }
+          });
+    })
+
+    $('#journal_watch_graph_hide').on("click", function (e) {
+        e.preventDefault();
+        $('#journal_watch_graph').hide()
+    })
+
+    $('#journal_past_graph_hide').on("click", function (e) {
+        e.preventDefault();
+        $('#journal_past_graph').hide()
+    })
+
+    $('#security_list').on('change', function(e){
+        var security_id = $('#security_list').val();
+        $('#security_id').attr("value", security_id);
+        window.location.replace('/admin_dashboard/' + security_id);
+    })
+
+    $('#back_to_detail').on('click', function(e) {
+        e.preventDefault();
+        $('#movement_chart_form').hide();
+    })
+
+    $('#hide_earningsfly').on('click', function(e) {
+        e.preventDefault();
+        $('#earningsfly_form').hide();
+    })
+});
+</script>
+<script>
+function add_symbol_to_watchlist(security_id, symbol, side) {
+    var journal_id = $('#watchlist_' + security_id + '_' + symbol + '_' + side).val();
+    if(journal_id != ""){
+        var csrf_token = $('input[name=csrfmiddlewaretoken]').val();
+        $.ajax({
+              method: "POST",
+              url: "/add_symbol_to_watchlist/",
+              data: {security_id: security_id, symbol: symbol, side: side, journal_id: journal_id, csrfmiddlewaretoken: csrf_token},
+              success: function (result) {
+                  if(result.result == "success"){
+                  }
+              }
+        });
+    }
+}
+function display_movement_chart(id, ticker){
+    var csrf_token = $('input[name=csrfmiddlewaretoken]').val();
+    $.ajax({
+        method: "POST",
+        url: "/get_movement_chart/",
+        data: {id: id, ticker: ticker.toString(), csrfmiddlewaretoken: csrf_token},
+        success: function (result) {
+            if (result == {}){
+                location.reload();
+            }else{
+                var graph_data = result.result;
+                var max_value = result.max;
+                createChart(ticker, graph_data, max_value);
+                $('#movement_chart_form').show();
+            }
+        }
+    });
+}
+function display_earningsfly(id, ticker){
+    var csrf_token = $('input[name=csrfmiddlewaretoken]').val();
+    $.ajax({
+        method: "POST",
+        url: "/get_earningsfly/",
+        data: {id: id, ticker: ticker.toString(), csrfmiddlewaretoken: csrf_token},
+        success: function (result) {
+            {% comment %}var name = result.name;
+            var content = result.content;
+            var link = result.link;{% endcomment %}
+            var content = result.content;
+            $('#earningsfly_body').html(content);
+            $('#earningsfly_form').show();
+        }
+    });
+}
+function view_journal_graph(security_id, symbol){
+    var csrf_token = $('input[name=csrfmiddlewaretoken]').val();
+    $.ajax({
+              method: "POST",
+              url: "/view_journal_watch_graph/",
+              data: {security_id: security_id, symbol: symbol, csrfmiddlewaretoken: csrf_token},
+              success: function (result) {
+                  var long_graph_price_data = result.long_graph_price_data;
+                  var short_graph_price_data = result.short_graph_price_data;
+                  var graph_price_index = result.price_index;
+                  var long_graph_level = result.long_graph_level;
+                  var short_graph_level = result.short_graph_level;
+                  var long_level_sum = result.long_level_sum;
+                  var short_level_sum = result.short_level_sum;
+                  var daily_volatility_data = result.daily_volatility;
+                  var daily_graph_level = result.daily_graph_level;
+                  var long_min = result.long_min;
+                  var long_dif = result.long_dif;
+                  var short_min = result.short_min;
+                  var short_dif = result.short_dif;
+                  var daily_min = result.daily_min;
+                  var daily_dif = result.daily_dif;
+                  $('#journal_watch_graph_title').html(symbol);
+                  journal_watch_price_graph(long_graph_price_data, short_graph_price_data, graph_price_index, long_min, long_dif, short_min, short_dif);
+                  $('#journal_watch_graph_price').show();
+                  journal_watch_level_graph(long_graph_level, short_graph_level, long_level_sum, short_level_sum);
+                  $('#journal_watch_graph_level').show();
+                  journal_volatility_price_graph(daily_volatility_data, graph_price_index, daily_min, daily_dif);
+                  $('#journal_volatility_graph_price').show();
+                  journal_volatility_level_graph(daily_graph_level);
+                  $('#journal_volatility_graph_level').show();
+              }
+          });
+    $('#journal_watch_graph').show();
+}
+function view_journal_past_graph(journal_data_id){
+    var csrf_token = $('input[name=csrfmiddlewaretoken]').val();
+    $.ajax({
+              method: "POST",
+              url: "/view_journal_past_graph/",
+              data: {journal_data_id: journal_data_id, csrfmiddlewaretoken: csrf_token},
+              success: function (result) {
+                  var long_graph_price_data = result.long_graph_price_data;
+                  var short_graph_price_data = result.short_graph_price_data;
+                  var graph_price_index = result.price_index;
+                  var long_graph_level = result.long_graph_level;
+                  var short_graph_level = result.short_graph_level;
+                  var long_level_sum = result.long_level_sum;
+                  var short_level_sum = result.short_level_sum;
+                  var daily_volatility_data = result.daily_volatility;
+                  var daily_graph_level = result.daily_graph_level;
+                  var long_min = result.long_min;
+                  var long_dif = result.long_dif;
+                  var short_min = result.short_min;
+                  var short_dif = result.short_dif;
+                  var daily_min = result.daily_min;
+                  var daily_dif = result.daily_dif;
+                  var symbol = result.symbol;
+                  $('#journal_past_graph_title').html(symbol);
+                  journal_past_price_graph(long_graph_price_data, short_graph_price_data, graph_price_index, long_min, long_dif, short_min, short_dif);
+                  $('#journal_past_graph_price').show();
+                  journal_past_level_graph(long_graph_level, short_graph_level, long_level_sum, short_level_sum);
+                  $('#journal_past_graph_level').show();
+                  journal_volatility_past_price(daily_volatility_data, graph_price_index, daily_min, daily_dif);
+                  $('#journal_volatility_past_price').show();
+                  journal_volatility_past_level(daily_graph_level);
+                  $('#journal_volatility_past_level').show();
+              }
+          });
+    $('#journal_past_graph').show();
+}
+function delete_journal_item(journal_data_id){//security_id, symbol, side){
+    var csrf_token = $('input[name=csrfmiddlewaretoken]').val();
+    $.ajax({
+        method: "POST",
+        url: "/delete_journal_item/",
+        //data: {security_id: security_id, symbol: symbol, side: side, csrfmiddlewaretoken: csrf_token},
+        data: {security_id: journal_data_id, csrfmiddlewaretoken: csrf_token},
+        success: function (result) {
+            if(result.success == "true"){
+                $('#journal_watchlist_tbody tr').each(function(){
+                    if($("td:first-child", this).text() == symbol && $("td:nth-child(2)", this).text() == side){
+                        console.log($("td:nth-child(2)", this).text());
+                        $(this).remove();
+                    };
+                })
+            }
+        }
+    });
+}
+</script>
+<script>
+function detail_price_graph(ticker, long_data, short_data, index, long_min, long_dif, short_min, short_dif) {
+    Highcharts.chart('detail_price_graph_' + ticker, {
+        chart: {
+            type: 'column',
+            backgroundColor: '#2e3e4e'
+        },
+
+        title: {
+            text: ticker + ' Short&Long Graph',
+            style: {
+                color: '#f8f8f8'
+            }
+        },
+
+        xAxis: {
+            labels: {
+                style: {
+                    color: '#f8f8f8'
+                }
+            },
+            categories: index,
+        },
+
+        yAxis: {
+            allowDecimals: false,
+            min: 0,
+            gridLineColor: '#464a4c',
+            labels: {
+                style: {
+                    color: '#f8f8f8'
+                }
+            },
+            title: {
+                enabled: false,
+                {% comment %}text: 'Number of fruits'{% endcomment %}
+            }
+        },
+
+        tooltip: {
+            formatter: function () {
+                if(this.series.name == "Short")
+                {
+                    return '<b>' + this.x + '</b><br/>' + this.series.name + ': ' + this.y + '<br/>' + 'Precantage: ' + ((this.y - short_min) / short_dif + 5).toFixed(2) + '%';
+                }
+                else if(this.series.name == "Long")
+                {
+                    return '<b>' + this.x + '</b><br/>' + this.series.name + ': ' + this.y + '<br/>' + 'Precantage: ' + ((this.y - long_min) / long_dif + 5).toFixed(2) + '%';
+                }
+
+            }
+        },
+
+        legend: {
+            itemStyle: {
+                color: '#f8f8f8',
+                fontWeight: 'bold'
+            }
+        },
+
+        plotOptions: {
+            column: {
+                stacking: 'normal',
+                labels: {
+                    style: {
+                        color: '#f8f8f8'
+                    }
+                },
+            }
+        },
+
+        navigation: {
+            buttonOptions: {
+                enabled: false,
+            }
+        },
+        series: [{
+            name: 'Short',
+            data: short_data,
+            color: '#f44455',
+            stack: 'price'
+        }, {
+            name: 'Long',
+            data: long_data,
+            color: '#0cc2aa',
+            stack: 'price'
+        }]
+    });
+}
+function detail_level_graph(ticker, long_data, short_data, long_sum, short_sum) {
+    //var categories = ['5%', '10%', '20%', '30%', '40%', '50%', '60%', '70%', '80%', '90%', '95%'];
+    var categories = ['5%', '10%', '15%', '20%', '25%', '30%', '35%', '40%', '45%', '50%', '55%', '60%', '65%', '70%', '75%', '80%', '85%', '90%', '95%'];
+
+    Highcharts.chart('detail_level_graph_' + ticker, {
+        chart: {
+            type: 'bar',
+            backgroundColor: '#2e3e4e'
+
+        },
+        title: {
+            text: ticker + ' Short&Long Percentage Level',
+            style: {
+                color: '#f8f8f8'
+            }
+        },
+        accessibility: {
+            point: {
+                valueDescriptionFormat: '{index}. Age {xDescription}, {value}%.'
+            }
+        },
+        xAxis: [{
+            categories: categories,
+            reversed: false,
+            labels: {
+                step: 1,
+                style: {
+                    color: '#f8f8f8'
+                }
+            },
+        }, { // mirror axis on right side
+            opposite: true,
+            reversed: false,
+            categories: categories,
+            linkedTo: 0,
+            labels: {
+                step: 1,
+                style: {
+                    color: '#f8f8f8'
+                }
+            },
+        }],
+        yAxis: {
+            title: {
+                text: null
+            },
+            labels: {
+                style: {
+                    color: '#f8f8f8'
+                },
+                formatter: function () {
+                    return Math.abs(this.value) + '%';
+                }
+            },
+            accessibility: {
+                description: 'Percentage population',
+                rangeDescription: 'Range: 0 to 5%'
+            }
+        },
+
+        plotOptions: {
+            series: {
+                stacking: 'normal'
+            }
+        },
+
+        legend: {
+            itemStyle: {
+                color: '#f8f8f8',
+                fontWeight: 'bold'
+            }
+        },
+
+        navigation: {
+            buttonOptions: {
+                enabled: false,
+            }
+        },
+
+        tooltip: {
+            formatter: function () {
+                //return '<b>' + this.series.name + ' Level of ' + this.point.category + '</b><br/>' + 'Value: ' + Highcharts.numberFormat(Math.abs(this.point.y), 1) + '%<br/>' + 'Sum:' + Highcharts.numberFormat(Math.abs(this.point.z), 1) + '%';
+                return '<b>' + this.series.name + ' Level of ' + this.point.category + '</b><br/>' + 'Value: ' + Math.abs(this.point.y) + '%<br/>' + 'Sum:' + Math.abs(this.point.z) + '%';
+                {% comment %}if(this.series.name == "Long%"){
+                    return '<b>' + this.series.name + ' Level of ' + this.point.category + '</b><br/>' + 'Value: ' + Highcharts.numberFormat(Math.abs(this.point.y), 1) + '%<br/>' + 'Sum:' + long_sum[this.point.category.toString()] + '%';
+                }
+                else if(this.series.name == "Short%"){
+                    return '<b>' + this.series.name + ' Level of ' + this.point.category + '</b><br/>' + 'Value: ' + Highcharts.numberFormat(Math.abs(this.point.y), 1) + '%<br/>' + 'Sum:' + short_sum[this.point.category.toString()] + '%';
+                }{% endcomment %}
+
+            }
+        },
+
+        series: [{
+            name: 'Short%',
+            color: '#f44455',
+            data: short_data
+        }, {
+            name: 'Long%',
+            color: '#0cc2aa',
+            data: long_data
+        }]
+    });
+}
+function daily_volatility_graph(ticker, data, index, daily_min, daily_dif){
+    Highcharts.chart('daily_volatility_graph_' + ticker, {
+        chart: {
+            type: 'column',
+            backgroundColor: '#2e3e4e'
+        },
+
+        title: {
+            text: ticker + ' Daily Volatility Graph',
+            style: {
+                color: '#f8f8f8'
+            }
+        },
+
+        xAxis: {
+            labels: {
+                style: {
+                    color: '#f8f8f8'
+                }
+            },
+            categories: index,
+        },
+
+        yAxis: {
+            allowDecimals: false,
+            min: 0,
+            gridLineColor: '#464a4c',
+            labels: {
+                style: {
+                    color: '#f8f8f8'
+                }
+            },
+            title: {
+                enabled: false,
+                {% comment %}text: 'Number of fruits'{% endcomment %}
+            }
+        },
+
+        tooltip: {
+            formatter: function () {
+                return '<b>' + this.x + '</b><br/>' +
+                    this.series.name + ': ' + this.y + '<br/>' + 'Percentage:' + ((this.y - daily_min) / daily_dif + 5).toFixed(2) + '%';
+            }
+        },
+
+        legend: {
+            itemStyle: {
+                color: '#f8f8f8',
+                fontWeight: 'bold'
+            }
+        },
+
+        plotOptions: {
+            column: {
+                stacking: 'normal',
+                labels: {
+                    style: {
+                        color: '#f8f8f8'
+                    }
+                },
+            }
+        },
+
+        navigation: {
+            buttonOptions: {
+                enabled: false,
+            }
+        },
+        series: [{
+            name: 'Daily Volatility',
+            data: data,
+            color: '#f44455',
+            stack: 'price'
+        }]
+    });
+}
+function daily_level_graph(ticker, data) {
+    var categories = ['5%', '10%', '15%', '20%', '25%', '30%', '35%', '40%', '45%', '50%', '55%', '60%', '65%', '70%', '75%', '80%', '85%', '90%', '95%'];
+    Highcharts.chart('daily_level_graph_' + ticker, {
+        chart: {
+            type: 'bar',
+            backgroundColor: '#2e3e4e'
+
+        },
+        title: {
+            text: ticker + ' Short&Long Percentage Level',
+            style: {
+                color: '#f8f8f8'
+            }
+        },
+        accessibility: {
+            point: {
+                valueDescriptionFormat: '{index}. Age {xDescription}, {value}%.'
+            }
+        },
+        xAxis: [{
+            categories: categories,
+            reversed: false,
+            labels: {
+                step: 1,
+                style: {
+                    color: '#f8f8f8'
+                }
+            },
+            {% comment %}accessibility: {
+                description: 'Age (male)'
+            }{% endcomment %}
+        }, { // mirror axis on right side
+            opposite: true,
+            reversed: false,
+            categories: categories,
+            linkedTo: 0,
+            labels: {
+                step: 1,
+                style: {
+                    color: '#f8f8f8'
+                }
+            },
+            {% comment %}accessibility: {
+                description: 'Age (female)'
+            }{% endcomment %}
+        }],
+        yAxis: {
+            title: {
+                text: null
+            },
+            labels: {
+                style: {
+                    color: '#f8f8f8'
+                },
+                formatter: function () {
+                    return Math.abs(this.value) + '%';
+                }
+            },
+            accessibility: {
+                description: 'Percentage population',
+                rangeDescription: 'Range: 0 to 5%'
+            }
+        },
+
+        plotOptions: {
+            series: {
+                stacking: 'normal'
+            }
+        },
+
+        legend: {
+            itemStyle: {
+                color: '#f8f8f8',
+                fontWeight: 'bold'
+            }
+        },
+
+        navigation: {
+            buttonOptions: {
+                enabled: false,
+            }
+        },
+
+        tooltip: {
+            formatter: function () {
+                return '<b>' + this.series.name + ' Level of ' + this.point.category + '</b><br/>' +
+                    'Value: ' + Highcharts.numberFormat(Math.abs(this.point.y), 1) + '%<br/>' + 'Sum: ' + this.point.z + '%';
+            }
+        },
+
+        series: [{
+            name: 'Percent Level',
+            color: '#f44455',
+            data: data
+        }]
+    });
+}
+function journal_watch_price_graph(long_data, short_data, index, long_min, long_dif, short_min, short_dif) {
+    Highcharts.chart('journal_watch_graph_price', {
+        chart: {
+            type: 'column',
+            backgroundColor: '#2e3e4e'
+        },
+
+        title: {
+            text: 'Short&Long Graph',
+            style: {
+                color: '#f8f8f8'
+            }
+        },
+
+        xAxis: {
+            labels: {
+                style: {
+                    color: '#f8f8f8'
+                }
+            },
+            categories: index,
+        },
+
+        yAxis: {
+            allowDecimals: false,
+            min: 0,
+            gridLineColor: '#464a4c',
+            labels: {
+                style: {
+                    color: '#f8f8f8'
+                }
+            },
+            title: {
+                enabled: false,
+                {% comment %}text: 'Number of fruits'{% endcomment %}
+            }
+        },
+
+        tooltip: {
+            formatter: function () {
+                //return '<b>' + this.x + '</b><br/>' + this.series.name + ': ' + this.y + '<br/>';
+                if(this.series.name == "Short")
+                {
+                    return '<b>' + this.x + '</b><br/>' + this.series.name + ': ' + this.y + '<br/>' + 'Precantage: ' + ((this.y - short_min) / short_dif + 5).toFixed(2) + '%';
+                }
+                else if(this.series.name == "Long")
+                {
+                    return '<b>' + this.x + '</b><br/>' + this.series.name + ': ' + this.y + '<br/>' + 'Precantage: ' + ((this.y - long_min) / long_dif + 5).toFixed(2) + '%';
+                }
+            }
+        },
+
+        legend: {
+            itemStyle: {
+                color: '#f8f8f8',
+                fontWeight: 'bold'
+            }
+        },
+
+        plotOptions: {
+            column: {
+                stacking: 'normal',
+                labels: {
+                    style: {
+                        color: '#f8f8f8'
+                    }
+                },
+            }
+        },
+
+        navigation: {
+            buttonOptions: {
+                enabled: false,
+            }
+        },
+        series: [{
+            name: 'Short',
+            data: short_data,
+            color: '#f44455',
+            stack: 'price'
+        }, {
+            name: 'Long',
+            data: long_data,
+            color: '#0cc2aa',
+            stack: 'price'
+        }]
+    });
+}
+function journal_watch_level_graph(long_data, short_data, long_sum, short_sum) {
+    //var categories = ['5%', '10%', '20%', '30%', '40%', '50%', '60%', '70%', '80%', '90%', '95%'];
+    var categories = ['5%', '10%', '15%', '20%', '25%', '30%', '35%', '40%', '45%', '50%', '55%', '60%', '65%', '70%', '75%', '80%', '85%', '90%', '95%'];
+
+    Highcharts.chart('journal_watch_graph_level', {
+        chart: {
+            type: 'bar',
+            backgroundColor: '#2e3e4e'
+
+        },
+        title: {
+            text: 'Short&Long Percentage Level',
+            style: {
+                color: '#f8f8f8'
+            }
+        },
+        accessibility: {
+            point: {
+                valueDescriptionFormat: '{index}. Age {xDescription}, {value}%.'
+            }
+        },
+        xAxis: [{
+            categories: categories,
+            reversed: false,
+            labels: {
+                step: 1,
+                style: {
+                    color: '#f8f8f8'
+                }
+            },
+            {% comment %}accessibility: {
+                description: 'Age (male)'
+            }{% endcomment %}
+        }, { // mirror axis on right side
+            opposite: true,
+            reversed: false,
+            categories: categories,
+            linkedTo: 0,
+            labels: {
+                step: 1,
+                style: {
+                    color: '#f8f8f8'
+                }
+            },
+            {% comment %}accessibility: {
+                description: 'Age (female)'
+            }{% endcomment %}
+        }],
+        yAxis: {
+            title: {
+                text: null
+            },
+            labels: {
+                style: {
+                    color: '#f8f8f8'
+                },
+                formatter: function () {
+                    return Math.abs(this.value) + '%';
+                }
+            },
+            accessibility: {
+                description: 'Percentage population',
+                rangeDescription: 'Range: 0 to 5%'
+            }
+        },
+
+        plotOptions: {
+            series: {
+                stacking: 'normal'
+            }
+        },
+
+        legend: {
+            itemStyle: {
+                color: '#f8f8f8',
+                fontWeight: 'bold'
+            }
+        },
+
+        navigation: {
+            buttonOptions: {
+                enabled: false,
+            }
+        },
+
+        tooltip: {
+            formatter: function () {
+                //return '<b>' + this.series.name + ' Level of ' + this.point.category + '</b><br/>' + 'Value: ' + Highcharts.numberFormat(Math.abs(this.point.y), 1) + '%';
+                return '<b>' + this.series.name + ' Level of ' + this.point.category + '</b><br/>' + 'Value: ' + Math.abs(this.point.y) + '%<br/>' + 'Sum:' + Math.abs(this.point.z) + '%';
+            }
+        },
+
+        series: [{
+            name: 'Short%',
+            color: '#f44455',
+            data: short_data
+        }, {
+            name: 'Long%',
+            color: '#0cc2aa',
+            data: long_data
+        }]
+    });
+}
+function journal_volatility_price_graph(data, index, daily_min, daily_dif) {
+    Highcharts.chart('journal_volatility_graph_price', {
+        chart: {
+            type: 'column',
+            backgroundColor: '#2e3e4e'
+        },
+
+        title: {
+            text: 'Daily Volatility Graph',
+            style: {
+                color: '#f8f8f8'
+            }
+        },
+
+        xAxis: {
+            labels: {
+                style: {
+                    color: '#f8f8f8'
+                }
+            },
+            categories: index,
+        },
+
+        yAxis: {
+            allowDecimals: false,
+            min: 0,
+            gridLineColor: '#464a4c',
+            labels: {
+                style: {
+                    color: '#f8f8f8'
+                }
+            },
+            title: {
+                enabled: false,
+                {% comment %}text: 'Number of fruits'{% endcomment %}
+            }
+        },
+
+        tooltip: {
+            formatter: function () {
+                return '<b>' + this.x + '</b><br/>' +
+                    this.series.name + ': ' + this.y + '<br/>' + 'Percentage:' + ((this.y - daily_min) / daily_dif + 5).toFixed(2) + '%';
+            }
+        },
+
+        legend: {
+            itemStyle: {
+                color: '#f8f8f8',
+                fontWeight: 'bold'
+            }
+        },
+
+        plotOptions: {
+            column: {
+                stacking: 'normal',
+                labels: {
+                    style: {
+                        color: '#f8f8f8'
+                    }
+                },
+            }
+        },
+
+        navigation: {
+            buttonOptions: {
+                enabled: false,
+            }
+        },
+        series: [{
+            name: 'Daily Volatility',
+            data: data,
+            color: '#f44455',
+            stack: 'price'
+        }]
+    });
+}
+function journal_volatility_level_graph(data) {
+    //var categories = ['5%', '10%', '20%', '30%', '40%', '50%', '60%', '70%', '80%', '90%', '95%'];
+    var categories = ['5%', '10%', '15%', '20%', '25%', '30%', '35%', '40%', '45%', '50%', '55%', '60%', '65%', '70%', '75%', '80%', '85%', '90%', '95%'];
+
+    Highcharts.chart('journal_volatility_graph_level', {
+        chart: {
+            type: 'bar',
+            backgroundColor: '#2e3e4e'
+
+        },
+        title: {
+            text: 'Short&Long Percentage Level',
+            style: {
+                color: '#f8f8f8'
+            }
+        },
+        accessibility: {
+            point: {
+                valueDescriptionFormat: '{index}. Age {xDescription}, {value}%.'
+            }
+        },
+        xAxis: [{
+            categories: categories,
+            reversed: false,
+            labels: {
+                step: 1,
+                style: {
+                    color: '#f8f8f8'
+                }
+            },
+            {% comment %}accessibility: {
+                description: 'Age (male)'
+            }{% endcomment %}
+        }, { // mirror axis on right side
+            opposite: true,
+            reversed: false,
+            categories: categories,
+            linkedTo: 0,
+            labels: {
+                step: 1,
+                style: {
+                    color: '#f8f8f8'
+                }
+            },
+            {% comment %}accessibility: {
+                description: 'Age (female)'
+            }{% endcomment %}
+        }],
+        yAxis: {
+            title: {
+                text: null
+            },
+            labels: {
+                style: {
+                    color: '#f8f8f8'
+                },
+                formatter: function () {
+                    return Math.abs(this.value) + '%';
+                }
+            },
+            accessibility: {
+                description: 'Percentage population',
+                rangeDescription: 'Range: 0 to 5%'
+            }
+        },
+
+        plotOptions: {
+            series: {
+                stacking: 'normal'
+            }
+        },
+
+        legend: {
+            itemStyle: {
+                color: '#f8f8f8',
+                fontWeight: 'bold'
+            }
+        },
+
+        navigation: {
+            buttonOptions: {
+                enabled: false,
+            }
+        },
+
+        tooltip: {
+            formatter: function () {
+                return '<b>' + this.series.name + ' Level of ' + this.point.category + '</b><br/>' +
+                    'Value: ' + Highcharts.numberFormat(Math.abs(this.point.y), 1) + '%<br/>' + 'Sum: ' + this.point.z + '%';
+            }
+        },
+
+        series: [{
+            name: 'Percent Level',
+            color: '#f44455',
+            data: data
+        }]
+    });
+}
+function journal_past_price_graph(long_data, short_data, index, long_min, long_dif, short_min, short_dif) {
+    Highcharts.chart('journal_past_graph_price', {
+        chart: {
+            type: 'column',
+            backgroundColor: '#2e3e4e'
+        },
+
+        title: {
+            text: 'Short&Long Graph',
+            style: {
+                color: '#f8f8f8'
+            }
+        },
+
+        xAxis: {
+            labels: {
+                style: {
+                    color: '#f8f8f8'
+                }
+            },
+            categories: index,
+        },
+
+        yAxis: {
+            allowDecimals: false,
+            min: 0,
+            gridLineColor: '#464a4c',
+            labels: {
+                style: {
+                    color: '#f8f8f8'
+                }
+            },
+            title: {
+                enabled: false,
+                {% comment %}text: 'Number of fruits'{% endcomment %}
+            }
+        },
+
+        tooltip: {
+            formatter: function () {
+                //return '<b>' + this.x + '</b><br/>' + this.series.name + ': ' + this.y + '<br/>';
+                if(this.series.name == "Short")
+                {
+                    return '<b>' + this.x + '</b><br/>' + this.series.name + ': ' + this.y + '<br/>' + 'Precantage: ' + ((this.y - short_min) / short_dif + 5).toFixed(2) + '%';
+                }
+                else if(this.series.name == "Long")
+                {
+                    return '<b>' + this.x + '</b><br/>' + this.series.name + ': ' + this.y + '<br/>' + 'Precantage: ' + ((this.y - long_min) / long_dif + 5).toFixed(2) + '%';
+                }
+            }
+        },
+
+        legend: {
+            itemStyle: {
+                color: '#f8f8f8',
+                fontWeight: 'bold'
+            }
+        },
+
+        plotOptions: {
+            column: {
+                stacking: 'normal',
+                labels: {
+                    style: {
+                        color: '#f8f8f8'
+                    }
+                },
+            }
+        },
+
+        navigation: {
+            buttonOptions: {
+                enabled: false,
+            }
+        },
+        series: [{
+            name: 'Short',
+            data: short_data,
+            color: '#f44455',
+            stack: 'price'
+        }, {
+            name: 'Long',
+            data: long_data,
+            color: '#0cc2aa',
+            stack: 'price'
+        }]
+    });
+}
+function journal_past_level_graph(long_data, short_data, long_sum, short_sum) {
+    //var categories = ['5%', '10%', '20%', '30%', '40%', '50%', '60%', '70%', '80%', '90%', '95%'];
+    var categories = ['5%', '10%', '15%', '20%', '25%', '30%', '35%', '40%', '45%', '50%', '55%', '60%', '65%', '70%', '75%', '80%', '85%', '90%', '95%'];
+
+    Highcharts.chart('journal_past_graph_level', {
+        chart: {
+            type: 'bar',
+            backgroundColor: '#2e3e4e'
+
+        },
+        title: {
+            text: 'Short&Long Percentage Level',
+            style: {
+                color: '#f8f8f8'
+            }
+        },
+        accessibility: {
+            point: {
+                valueDescriptionFormat: '{index}. Age {xDescription}, {value}%.'
+            }
+        },
+        xAxis: [{
+            categories: categories,
+            reversed: false,
+            labels: {
+                step: 1,
+                style: {
+                    color: '#f8f8f8'
+                }
+            },
+            {% comment %}accessibility: {
+                description: 'Age (male)'
+            }{% endcomment %}
+        }, { // mirror axis on right side
+            opposite: true,
+            reversed: false,
+            categories: categories,
+            linkedTo: 0,
+            labels: {
+                step: 1,
+                style: {
+                    color: '#f8f8f8'
+                }
+            },
+            {% comment %}accessibility: {
+                description: 'Age (female)'
+            }{% endcomment %}
+        }],
+        yAxis: {
+            title: {
+                text: null
+            },
+            labels: {
+                style: {
+                    color: '#f8f8f8'
+                },
+                formatter: function () {
+                    return Math.abs(this.value) + '%';
+                }
+            },
+            accessibility: {
+                description: 'Percentage population',
+                rangeDescription: 'Range: 0 to 5%'
+            }
+        },
+
+        plotOptions: {
+            series: {
+                stacking: 'normal'
+            }
+        },
+
+        legend: {
+            itemStyle: {
+                color: '#f8f8f8',
+                fontWeight: 'bold'
+            }
+        },
+
+        navigation: {
+            buttonOptions: {
+                enabled: false,
+            }
+        },
+
+        tooltip: {
+            formatter: function () {
+                //return '<b>' + this.series.name + ' Level of ' + this.point.category + '</b><br/>' + 'Value: ' + Highcharts.numberFormat(Math.abs(this.point.y), 1) + '%';
+                return '<b>' + this.series.name + ' Level of ' + this.point.category + '</b><br/>' + 'Value: ' + Math.abs(this.point.y) + '%<br/>' + 'Sum:' + Math.abs(this.point.z) + '%';
+            }
+        },
+
+        series: [{
+            name: 'Short%',
+            color: '#f44455',
+            data: short_data
+        }, {
+            name: 'Long%',
+            color: '#0cc2aa',
+            data: long_data
+        }]
+    });
+}
+function journal_volatility_past_price(data, index, daily_min, daily_dif) {
+    Highcharts.chart('journal_volatility_past_price', {
+        chart: {
+            type: 'column',
+            backgroundColor: '#2e3e4e'
+        },
+
+        title: {
+            text: 'Daily Volatility Graph',
+            style: {
+                color: '#f8f8f8'
+            }
+        },
+
+        xAxis: {
+            labels: {
+                style: {
+                    color: '#f8f8f8'
+                }
+            },
+            categories: index,
+        },
+
+        yAxis: {
+            allowDecimals: false,
+            min: 0,
+            gridLineColor: '#464a4c',
+            labels: {
+                style: {
+                    color: '#f8f8f8'
+                }
+            },
+            title: {
+                enabled: false,
+                {% comment %}text: 'Number of fruits'{% endcomment %}
+            }
+        },
+
+        tooltip: {
+            formatter: function () {
+                return '<b>' + this.x + '</b><br/>' +
+                    this.series.name + ': ' + this.y + '<br/>' + 'Percentage:' + ((this.y - daily_min) / daily_dif + 5).toFixed(2) + '%';
+            }
+        },
+
+        legend: {
+            itemStyle: {
+                color: '#f8f8f8',
+                fontWeight: 'bold'
+            }
+        },
+
+        plotOptions: {
+            column: {
+                stacking: 'normal',
+                labels: {
+                    style: {
+                        color: '#f8f8f8'
+                    }
+                },
+            }
+        },
+
+        navigation: {
+            buttonOptions: {
+                enabled: false,
+            }
+        },
+        series: [{
+            name: 'Daily Volatility',
+            data: data,
+            color: '#f44455',
+            stack: 'price'
+        }]
+    });
+}
+function journal_volatility_past_level(data) {
+    //var categories = ['5%', '10%', '20%', '30%', '40%', '50%', '60%', '70%', '80%', '90%', '95%'];
+    var categories = ['5%', '10%', '15%', '20%', '25%', '30%', '35%', '40%', '45%', '50%', '55%', '60%', '65%', '70%', '75%', '80%', '85%', '90%', '95%'];
+
+    Highcharts.chart('journal_volatility_past_level', {
+        chart: {
+            type: 'bar',
+            backgroundColor: '#2e3e4e'
+
+        },
+        title: {
+            text: 'Short&Long Percentage Level',
+            style: {
+                color: '#f8f8f8'
+            }
+        },
+        accessibility: {
+            point: {
+                valueDescriptionFormat: '{index}. Age {xDescription}, {value}%.'
+            }
+        },
+        xAxis: [{
+            categories: categories,
+            reversed: false,
+            labels: {
+                step: 1,
+                style: {
+                    color: '#f8f8f8'
+                }
+            },
+            {% comment %}accessibility: {
+                description: 'Age (male)'
+            }{% endcomment %}
+        }, { // mirror axis on right side
+            opposite: true,
+            reversed: false,
+            categories: categories,
+            linkedTo: 0,
+            labels: {
+                step: 1,
+                style: {
+                    color: '#f8f8f8'
+                }
+            },
+            {% comment %}accessibility: {
+                description: 'Age (female)'
+            }{% endcomment %}
+        }],
+        yAxis: {
+            title: {
+                text: null
+            },
+            labels: {
+                style: {
+                    color: '#f8f8f8'
+                },
+                formatter: function () {
+                    return Math.abs(this.value) + '%';
+                }
+            },
+            accessibility: {
+                description: 'Percentage population',
+                rangeDescription: 'Range: 0 to 5%'
+            }
+        },
+
+        plotOptions: {
+            series: {
+                stacking: 'normal'
+            }
+        },
+
+        legend: {
+            itemStyle: {
+                color: '#f8f8f8',
+                fontWeight: 'bold'
+            }
+        },
+
+        navigation: {
+            buttonOptions: {
+                enabled: false,
+            }
+        },
+
+        tooltip: {
+            formatter: function () {
+                return '<b>' + this.series.name + ' Level of ' + this.point.category + '</b><br/>' +
+                    'Value: ' + Highcharts.numberFormat(Math.abs(this.point.y), 1) + '%<br/>' + 'Sum: ' + this.point.z + '%';
+            }
+        },
+
+        series: [{
+            name: 'Percent Level',
+            color: '#f44455',
+            data: data
+        }]
+    });
+}
+function createChart(ticker, data_list, max_value) {
+  Highcharts.stockChart('movement_chart', {
+    chart: {
+        backgroundColor: "#354759"
+    },
+    rangeSelector: {
+      enabled: false,
+    },
+    navigator: {
+      enabled: false,
+    },
+    exporting: {
+      enabled: false
+    },
+
+    title: {
+      text: "7 Days Movement Chart " + ticker + "=" + max_value + "%",
+      style: {"color": "#6887ff"}
+    },
+    xAxis: [
+      {
+        labels: {
+          style:{
+            color: '#ffffff',
+          },
+        }
+      }
+    ],
+    yAxis: [
+      {
+        labels: {
+          align: 'right',
+          style:{
+            color: '#ffffff',
+          },
+          x: -3,
+        },
+        {% comment %}title: {
+          text: 'OHLC'
+        },{% endcomment %}
+        height: '100%',
+        lineWidth: 2,
+        resize: {
+          enabled: false
+        }
+      },
+    ],
+    scrollbar: {
+        enabled: false
+    },
+    tooltip: {
+      split: true
+    },
+    series: [
+      {
+        type: 'candlestick',
+        name: "Candle Chart",
+        data: data_list,
+      }
+    ]
+  });
+
+}
+</script>
+
+</body>
+</html>

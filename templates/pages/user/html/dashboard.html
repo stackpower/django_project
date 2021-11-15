@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Analytical Option Navigator</title>
+  <meta name="description" content="Admin, Dashboard, Bootstrap, Bootstrap 4, Angular, AngularJS" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimal-ui" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  {% load staticfiles %}
+  <!-- for ios 7 style, multi-resolution icon of 152x152 -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-barstyle" content="black-translucent">
+  <link rel="apple-touch-icon" href="{% static 'user/assets/images/logo.png' %}">
+  <meta name="apple-mobile-web-app-title" content="Flatkit">
+  <!-- for Chrome on Android, multi-resolution icon of 196x196 -->
+  <meta name="mobile-web-app-capable" content="yes">
+  {% comment %}<link rel="shortcut icon" sizes="196x196" href="{% static 'user/assets/images/logo.png' %}">{% endcomment %}
+  <link rel="icon" type="image/png" href="{% static 'landingpage/icon/favicon-32x32.png' %}" sizes="32x32">
+  <link rel="apple-touch-icon" href="{% static 'landingpage/icon/favicon-32x32.png' %}">
+  <!-- style -->
+  <link rel="stylesheet" href="{% static 'user/assets/animate.css/animate.min.css' %}" type="text/css" />
+  <link rel="stylesheet" href="{% static 'user/assets/glyphicons/glyphicons.css' %}" type="text/css" />
+  <link rel="stylesheet" href="{% static 'user/assets/font-awesome/css/font-awesome.min.css' %}" type="text/css" />
+  <link rel="stylesheet" href="{% static 'user/assets/material-design-icons/material-design-icons.css' %}" type="text/css" />
+
+  <link rel="stylesheet" href="{% static 'user/assets/bootstrap/dist/css/bootstrap.min.css' %}" type="text/css" />
+  <!-- build:css ../assets/styles/app.min.css -->
+  <link rel="stylesheet" href="{% static 'user/assets/styles/app.css' %}" type="text/css" />
+  <!-- endbuild -->
+  <link rel="stylesheet" href="{% static 'user/assets/styles/font.css' %}" type="text/css" />
+  <!-- new defined style-->
+  <link rel="stylesheet" href="../static/user/assets/styles/new_defined.css" type="text/css" />
+
+  <link rel="stylesheet" href="../static/user/assets/styles/multiselect.css" type="text/css" />
+  <script src="../static/user/libs/new_defined/multiselect.js"></script>
+</head>
+<body class="dark">
+  <div class="app" id="app">
+
+<!-- ############ LAYOUT START-->
+
+  <!-- aside -->
+  <div id="aside" class="app-aside modal nav-dropdown">
+  	<!-- fluid app aside -->
+    <div class="left navside dark dk" data-layout="column">
+  	  <div class="navbar no-radius">
+        <!-- brand -->
+        <a class="navbar-brand">
+        	{% comment %}<div ui-include="'../static/user/assets/images/logo.svg'"></div>{% endcomment %}
+        	<img src="../static/landingpage/img/title.png" alt="." >
+        	{% comment %}<span class="hidden-folded inline">Site Name</span>{% endcomment %}
+        </a>
+        <!-- / brand -->
+      </div>
+      <div class="hide-scroll" data-flex>
+          <nav class="scroll nav-light">
+              <ul class="nav" ui-nav>
+                {% comment %}<li class="nav-header hidden-folded">
+                  <small class="text-muted">Main</small>
+                </li>{% endcomment %}
+      <!-- Dashboard -->
+                <li>
+                  <a href={% url 'dashboard' id='all'%} >
+                    <div class="row">
+                      <span class="nav-icon fa fa-dashboard" style="margin-left: 10px">
+                      </span>
+                      <span class="nav-text">Security List</span>
+                    </div>
+                  </a>
+                </li>
+      <!-- Account Setting -->
+                <li>
+                  <a href="/account_setting">
+                    <div class="row">
+                      <span class="nav-icon fa fa-database" style="margin-left: 10px">
+                      </span>
+                      <span class="nav-text">Account Settings</span>
+                    </div>
+                  </a>
+                </li>
+      {% comment %}<!-- strategy -->
+                <li>
+                  <a href="/strategy_book">
+                    <div class="row">
+                      <span class="nav-icon fa fa-database" style="margin-left: 10px">
+                      </span>
+                      <span class="nav-text">Strategy Settings</span>
+                    </div>
+                  </a>
+                </li>
+      <!-- Reporting -->
+                <li>
+                  <a href="/reporting">
+                    <div class="row">
+                      <span class="nav-icon fa fa-bars" style="margin-left: 10px">
+                      </span>
+                      <span class="nav-text">Reporting</span>
+                    </div>
+                  </a>
+                </li>
+      <!-- Subscription -->
+                <li>
+                  <a href="/trading">
+                    <div class="row">
+                      <span class="nav-icon fa fa-tags" style="margin-left: 10px">
+                      </span>
+                      <span class="nav-text">Subscription Plan</span>
+                    </div>
+                  </a>
+                </li>
+      <!-- Payment -->
+                <li>
+                  <a href="/history">
+                    <div class="row">
+                      <span class="nav-icon fa fa-money" style="margin-left: 10px">
+                      </span>
+                      <span class="nav-text">Payment Gateway</span>
+                    </div>
+                  </a>
+                </li>
+      <!-- Exchange information -->
+                <li>
+                  <a href="/exchange_info">
+                    <div class="row">
+                      <span class="nav-icon fa fa-key" style="margin-left: 10px">
+                      </span>
+                      <span class="nav-text">Exchange</span>
+                    </div>
+                  </a>
+                </li>
+      <!-- Affiliate -->
+                <li>
+                  <a href="/user_setting">
+                    <div class="row">
+                      <span class="nav-icon fa fa-ticket" style="margin-left: 10px">
+                      </span>
+                      <span class="nav-text">Affiiate</span>
+                    </div>
+                  </a>
+                </li>
+      <!-- Email templates -->
+                <li>
+                  <a href="/user_setting">
+                    <div class="row">
+                      <span class="nav-icon fa fa-envelope" style="margin-left: 10px">
+                      </span>
+                      <span class="nav-text">Email Templates</span>
+                    </div>
+                  </a>
+                </li>
+      <!-- Logs -->
+                <li>
+                  <a href="/history">
+                    <div class="row">
+                      <span class="nav-icon fa fa-bars" style="margin-left: 10px">
+                      </span>
+                      <span class="nav-text">Logs</span>
+                    </div>
+                  </a>
+                </li>
+      <!-- Landingpage Content -->
+                <li>
+                  <a href="/doc_manage">
+                    <div class="row">
+                      <span class="nav-icon fa fa-sitemap" style="margin-left: 10px">
+                      </span>
+                      <span class="nav-text">Document Manage</span>
+                    </div>
+                  </a>
+                </li>
+      <!-- Languages -->
+                <li>
+                  <a href="/user_setting">
+                    <div class="row">
+                      <span class="nav-icon fa fa-language" style="margin-left: 10px">
+                      </span>
+                      <span class="nav-text">Languages</span>
+                    </div>
+                  </a>
+                </li>
+      <!-- Backup -->
+                <li>
+                  <a href="/user_setting">
+                    <div class="row">
+                      <span class="nav-icon fa fa-database" style="margin-left: 10px">
+                      </span>
+                      <span class="nav-text">Backup</span>
+                    </div>
+                  </a>
+                </li>{% endcomment %}
+              </ul>
+          </nav>
+      </div>
+      {% comment %}<div class="b-t">
+        <div class="nav-fold">
+        	<a href="profile.html">
+        	    <span class="pull-left">
+        	      <img src="{% static 'user/assets/images/a0.jpg' %}" alt="..." class="w-40 img-circle">
+        	    </span>
+        	    <span class="clear hidden-folded p-x">
+        	      <span class="block _500">Jean Reyes</span>
+        	      <small class="block text-muted"><i class="fa fa-circle text-success m-r-sm"></i>online</small>
+        	    </span>
+        	</a>
+        </div>
+      </div>{% endcomment %}
+    </div>
+  </div>
+  <!-- / -->
+
+  <!-- content -->
+  <div id="content" class="app-content box-shadow-z0" role="main">
+    <div class="app-header white box-shadow">
+        <div class="navbar navbar-toggleable-sm flex-row align-items-center">
+            <!-- Open side - Naviation on mobile -->
+            <a data-toggle="modal" data-target="#aside" class="hidden-lg-up mr-3">
+              <i class="material-icons">&#xe5d2;</i>
+            </a>
+            <!-- / -->
+
+            <!-- Page title - Bind to $state's title -->
+            <div class="mb-0 h5 no-wrap" ng-bind="$state.current.data.title" id="pageTitle"></div>
+
+            <!-- navbar collapse -->
+            <div class="collapse navbar-collapse" id="collapse">
+
+              <ul class="nav navbar-nav mr-auto">
+                <li class="nav-item dropdown">
+                    <h4 >Today: <strong id="today"></strong> (Chicago Time)</h4>
+                    {% comment %}<h4 style="margin-bottom: 0px">Today: <span>{{ today }}(Chicago TimeZone)</span></h4>{% endcomment %}
+                </li>
+              </ul>
+              <div ui-include="{% static 'user/views/blocks/navbar.form.html' %}"></div>
+              <!-- / -->
+            </div>
+
+        </div>
+    </div>
+    <div class="app-footer">
+      <div class="p-2 text-xs">
+        <div class="pull-right text-muted py-1">
+          &copy; <strong>OPTIONPARIS.COM</strong> <span class="hidden-xs-down">- Analytical Option Navigator <img width="20px" height="22px" src="../../../../static/landingpage/icon/heart.png"></span>
+        </div>
+        {% comment %}<div class="nav">
+          <a class="nav-link" href="{% static 'user/' %}">About</a>
+          <a class="nav-link" href="http://themeforest.net/user/flatfull/portfolio?ref=flatfull">Get it</a>
+        </div>{% endcomment %}
+      </div>
+    </div>
+    <div ui-view class="app-body" id="view">
+
+<!-- ############ PAGE START-->
+    <div class="padding">
+      {% include 'pages/message.html' %}
+      <div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="box">
+                    <div class="box-header">
+                        <h2>Security List</h2>
+                    </div>
+                    <div class="m-0" style="border-bottom: 3px solid rgba(120, 130, 140, 0.13)"></div>
+                    <div class="box-body">
+                        <form action="" method="post">{% csrf_token %}
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="b-b b-primary nav-active-primary">
+                                    <ul class="nav nav-tabs">
+                                        <li class="nav-item">
+                                            <a class="nav-link" href data-toggle="tab" data-target="#tab1">All Securitys</a>
+                                        </li>
+                                        <li class="nav-item dropdown" style="position: absolute; right: 70px">
+                                            <a class="nav-link" href data-toggle="modal" data-target="#add_security">
+                                                <i class="fa fa-fw fa-plus text-muted"></i>
+                                                <span>Add Security</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="tab-content p-a m-b-md">
+                                    <div class="tab-pane active" id="tab1">
+                                        <div class="box">
+                                            <div class="box-body">
+                                                Search: <input id="filter" type="text" class="form-control input-sm w-auto inline m-r"/>
+                                            </div>
+                                            <div>
+                                                <table class="table m-b-none" ui-jp="footable" data-filter="#filter" data-page-size="{{ security_length }}">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Type</th>
+                                                            <th>Security Name</th>
+                                                            <th>Trading Day</th>
+                                                            <th>Expire Date 1</th>
+                                                            <th>Expire Date 2</th>
+                                                            <th>Expire Date 3</th>
+                                                            <th>Symbol Count</th>
+                                                            <th>View</th>
+                                                            <th>Action</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    {% if security_list %}
+                                                        {% for security in security_list %}
+                                                        <tr>
+                                                            <td>{{security.type}}</td>
+                                                            <td>{{ security.name }}</td>
+                                                            <td>{{ security.trading_day }}</td>
+                                                            <td>{{ security.expire_date_1 }}</td>
+                                                            <td>{{ security.expire_date_2 }}</td>
+                                                            <td>{{ security.expire_date_3 }}</td>
+                                                            <td>{{ security.symbol_count }} <a class="label info" href="#" onclick="update_security({{ security.id }})">Go Update</a></td>
+                                                            <td>
+                                                                {%  if security.trading_day == "Expired" %}
+                                                                    <a class="label danger" href="#" disabled="disabled">View</a></td>
+                                                                {% else %}
+                                                                    <a class="label primary" href="/dashboard/{{ security.id }}">View</a></td>
+                                                                {% endif %}
+                                                            <td>
+                                                                <a class="label info" href="#" onclick="edit_security({{ security.id }})">Edit</a>
+                                                                <a class="label danger" href="/delete_security/{{ security.id }}">Delete</a>
+                                                            </td>
+                                                        </tr>
+                                                        {% endfor %}
+                                                    {% endif %}
+
+                                                    </tbody>
+                                                    <tfoot class="hide-if-no-paging">
+                                                        <tr>
+                                                            <td colspan="5" class="text-center">
+                                                                <ul class="pagination"></ul>
+                                                            </td>
+                                                        </tr>
+                                                    </tfoot>
+                                                </table>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+      </div>
+    </div>
+<!-- .modal -->
+<div id="edit_security" class="modal black-overlay" data-backdrop="true">
+    <div class="modal-dialog">
+      <div class="modal-content box-shadow-md black lt m-b">
+        <div class="modal-header">
+      	  <div class="col-sm-12 row"  >
+                <div class="col-sm-6">
+                    <h3 class="modal-title">Edit Security</h3>
+                </div>
+                <div class="col-sm-6 text-lg-right m-m">
+                    {% comment %}<a class="text-info " href="{% url 'dashboard' id='all' %}"><h6>Back</h6></a>{% endcomment %}
+                    <a class="text-info " href onclick="back_to_dashboard()"><h6>Back</h6></a>
+                </div>
+            </div>
+        </div>
+        <div class="modal-body p-lg">
+          <form id="edit_security_form" method="post">{% csrf_token %}
+            <input type="hidden" id="edit_id" name="edit_id">
+      <!--   Security Name  -->
+            <div class="form-group row">
+              <label class="col-sm-4 form-control-label" style="text-align: right">Security Name</label>
+              <div class="col-sm-8">
+                <input type="text" id="edit_security_name" name="edit_security_name" class="form-control"  required/>
+              </div>
+            </div>
+      <!--  Security Type  -->
+            <div class="form-group row">
+              <label class="col-sm-4 form-control-label" style="text-align: right">Security Type</label>
+              <div class="col-sm-8">
+                <select required name="edit_security_type" id="edit_security_type" style="background-color: rgb(72,87,103);" class="form-control">
+                    <option value=""></option>
+                    <option value="STOCK">Stock</option>
+                    <option value="CFD">CFD</option>
+                    <option value="CFD_INDEX">CFD Index</option>
+                    <option value="FOREX">Forex</option>
+                </select>
+              </div>
+            </div>
+      <!--  Trading Day-->
+            <div class="form-group row">
+                <label class="col-sm-4 form-control-label" style="text-align: right">Trading Day</label>
+                <div class="col-sm-8">
+                    <div class="form-group">
+                                                        <div class='input-group date' ui-jp="datetimepicker" ui-options="{
+                                                            format: 'YYYY-M-D',
+                                                                icons: {
+                                                                    time: 'fa fa-clock-o',
+                                                                    date: 'fa fa-calendar',
+                                                                    up: 'fa fa-chevron-up',
+                                                                    down: 'fa fa-chevron-down',
+                                                                    previous: 'fa fa-chevron-left',
+                                                                    next: 'fa fa-chevron-right',
+                                                                    today: 'fa fa-screenshot',
+                                                                    clear: 'fa fa-trash',
+                                                                    close: 'fa fa-remove'
+                                                                }
+                                                        }">
+                                                            <input type='text' class="form-control" name="edit_trading_day" id="edit_trading_day" required/>
+                                                            <span class="input-group-addon">
+                                                                <span class="fa fa-calendar"></span>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                </div>
+            </div>
+      <!--  Expire Date 1-->
+            <div class="form-group row">
+                <label class="col-sm-4 form-control-label" style="text-align: right">Expire Date 1</label>
+                <div class="col-sm-8">
+                    <div class="form-group">
+                                                        <div class='input-group date' ui-jp="datetimepicker" ui-options="{
+                                                            format: 'YYYY-M-D',
+                                                                icons: {
+                                                                    time: 'fa fa-clock-o',
+                                                                    date: 'fa fa-calendar',
+                                                                    up: 'fa fa-chevron-up',
+                                                                    down: 'fa fa-chevron-down',
+                                                                    previous: 'fa fa-chevron-left',
+                                                                    next: 'fa fa-chevron-right',
+                                                                    today: 'fa fa-screenshot',
+                                                                    clear: 'fa fa-trash',
+                                                                    close: 'fa fa-remove'
+                                                                }
+                                                        }">
+                                                            <input type='text' class="form-control" name="edit_expire_date_1" id="edit_expire_date_1" required/>
+                                                            <span class="input-group-addon">
+                                                                <span class="fa fa-calendar"></span>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                </div>
+            </div>
+      <!--  Expire Date 2-->
+            <div class="form-group row">
+                <label class="col-sm-4 form-control-label" style="text-align: right">Expire Date 2</label>
+                <div class="col-sm-8">
+                    <div class="form-group">
+                                                        <div class='input-group date' ui-jp="datetimepicker" ui-options="{
+                                                            format: 'YYYY-M-D',
+                                                                icons: {
+                                                                    time: 'fa fa-clock-o',
+                                                                    date: 'fa fa-calendar',
+                                                                    up: 'fa fa-chevron-up',
+                                                                    down: 'fa fa-chevron-down',
+                                                                    previous: 'fa fa-chevron-left',
+                                                                    next: 'fa fa-chevron-right',
+                                                                    today: 'fa fa-screenshot',
+                                                                    clear: 'fa fa-trash',
+                                                                    close: 'fa fa-remove'
+                                                                }
+                                                        }">
+                                                            <input type='text' class="form-control" name="edit_expire_date_2" id="edit_expire_date_2" required/>
+                                                            <span class="input-group-addon">
+                                                                <span class="fa fa-calendar"></span>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                </div>
+            </div>
+      <!--  Expire Date 3-->
+            <div class="form-group row">
+                <label class="col-sm-4 form-control-label" style="text-align: right">Expire Date 3</label>
+                <div class="col-sm-8">
+                    <div class="form-group">
+                                                        <div class='input-group date' ui-jp="datetimepicker" ui-options="{
+                                                            format: 'YYYY-M-D',
+                                                                icons: {
+                                                                    time: 'fa fa-clock-o',
+                                                                    date: 'fa fa-calendar',
+                                                                    up: 'fa fa-chevron-up',
+                                                                    down: 'fa fa-chevron-down',
+                                                                    previous: 'fa fa-chevron-left',
+                                                                    next: 'fa fa-chevron-right',
+                                                                    today: 'fa fa-screenshot',
+                                                                    clear: 'fa fa-trash',
+                                                                    close: 'fa fa-remove'
+                                                                }
+                                                        }">
+                                                            <input type='text' class="form-control" name="edit_expire_date_3" id="edit_expire_date_3" required/>
+                                                            <span class="input-group-addon">
+                                                                <span class="fa fa-calendar"></span>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                </div>
+            </div>
+      <!--  Number of Bars  -->
+            <div class="form-group row">
+              <label class="col-sm-4 form-control-label text-right">Number of Bars</label>
+              <div class="col-sm-8">
+                <input type="text" id="edit_bar_size" name="edit_bar_size" class="form-control"  required/>
+              </div>
+            </div>
+      <!--  Button  -->
+            <div class="modal-footer">
+              <button type="submit" class="btn white p-x-md" style="background-color: #2e3e4e" >Update</button>
+
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+<div id="add_security" class="modal black-overlay" data-backdrop="true">
+    <div class="modal-dialog">
+      <div class="modal-content box-shadow-md black lt m-b">
+        <div class="modal-header">
+      	  <h5 class="modal-title">Add Security</h5>
+        </div>
+        <div class="modal-body p-lg">
+          <form action="{% url 'add_security' %}" {% comment %}id="add_security_form"{% endcomment %} enctype="multipart/form-data" method="post">{% csrf_token %}
+      <!--   Security Name  -->
+            <div class="form-group row">
+              <label class="col-sm-4 form-control-label" style="text-align: right">Security Name</label>
+              <div class="col-sm-8">
+                <input type="text" id="security_name" name="security_name" class="form-control"  required/>
+              </div>
+            </div>
+      <!--  Security Type  -->
+            <div class="form-group row">
+              <label class="col-sm-4 form-control-label" style="text-align: right">Security Type</label>
+              <div class="col-sm-8">
+                <select required name="security_type" id="security_type" style="background-color: rgb(72,87,103);" class="form-control">
+                    <option value=""></option>
+                    <option value="STOCK">Stock</option>
+                    <option value="CFD">CFD</option>
+                    <option value="CFD_INDEX" disabled>CFD Index</option>
+                    <option value="FOREX" disabled>Forex</option>
+                </select>
+              </div>
+            </div>
+      <!--  Security Import  -->
+            <div class="form-group row">
+              <label class="col-sm-4 form-control-label text-right" >Security Import</label>
+              <div class="col-sm-8">
+                <input type="file" accept=".xlsx" name="import_file" class="form-control" required>
+              </div>
+            </div>
+      <!--  Trading Day 1-->
+            <div class="form-group row">
+                <label class="col-sm-4 form-control-label" style="text-align: right">Trading Day</label>
+                <div class="col-sm-8">
+                    <div class="form-group">
+                                                        <div class='input-group date' ui-jp="datetimepicker" ui-options="{
+                                                            format: 'YYYY-M-D',
+                                                                icons: {
+                                                                    time: 'fa fa-clock-o',
+                                                                    date: 'fa fa-calendar',
+                                                                    up: 'fa fa-chevron-up',
+                                                                    down: 'fa fa-chevron-down',
+                                                                    previous: 'fa fa-chevron-left',
+                                                                    next: 'fa fa-chevron-right',
+                                                                    today: 'fa fa-screenshot',
+                                                                    clear: 'fa fa-trash',
+                                                                    close: 'fa fa-remove'
+                                                                }
+                                                        }">
+                                                            <input type='text' class="form-control" name="trading_day" id="trading_day" required/>
+                                                            <span class="input-group-addon">
+                                                                <span class="fa fa-calendar"></span>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                </div>
+            </div>
+      <!--  Expire Date 1-->
+            <div class="form-group row">
+                <label class="col-sm-4 form-control-label" style="text-align: right">Expire Date 1</label>
+                <div class="col-sm-8">
+                    <div class="form-group">
+                                                        <div class='input-group date' ui-jp="datetimepicker" ui-options="{
+                                                            format: 'YYYY-M-D',
+                                                                icons: {
+                                                                    time: 'fa fa-clock-o',
+                                                                    date: 'fa fa-calendar',
+                                                                    up: 'fa fa-chevron-up',
+                                                                    down: 'fa fa-chevron-down',
+                                                                    previous: 'fa fa-chevron-left',
+                                                                    next: 'fa fa-chevron-right',
+                                                                    today: 'fa fa-screenshot',
+                                                                    clear: 'fa fa-trash',
+                                                                    close: 'fa fa-remove'
+                                                                }
+                                                        }">
+                                                            <input type='text' class="form-control" name="expire_date_1" id="expire_date_1" required/>
+                                                            <span class="input-group-addon">
+                                                                <span class="fa fa-calendar"></span>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                </div>
+            </div>
+      <!--  Number of Bars  -->
+            <div class="form-group row">
+                <label class="col-sm-4 form-control-label" style="text-align: right">Expire Date 2</label>
+                <div class="col-sm-8">
+                    <div class="form-group">
+                                                        <div class='input-group date' ui-jp="datetimepicker" ui-options="{
+                                                            format: 'YYYY-M-D',
+                                                                icons: {
+                                                                    time: 'fa fa-clock-o',
+                                                                    date: 'fa fa-calendar',
+                                                                    up: 'fa fa-chevron-up',
+                                                                    down: 'fa fa-chevron-down',
+                                                                    previous: 'fa fa-chevron-left',
+                                                                    next: 'fa fa-chevron-right',
+                                                                    today: 'fa fa-screenshot',
+                                                                    clear: 'fa fa-trash',
+                                                                    close: 'fa fa-remove'
+                                                                }
+                                                        }">
+                                                            <input type='text' class="form-control" name="expire_date_2" id="expire_date_2" required/>
+                                                            <span class="input-group-addon">
+                                                                <span class="fa fa-calendar"></span>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                </div>
+            </div>
+      <!--  Expire Date 3-->
+            <div class="form-group row">
+                <label class="col-sm-4 form-control-label" style="text-align: right">Expire Date 3</label>
+                <div class="col-sm-8">
+                    <div class="form-group">
+                                                        <div class='input-group date' ui-jp="datetimepicker" ui-options="{
+                                                            format: 'YYYY-M-D',
+                                                                icons: {
+                                                                    time: 'fa fa-clock-o',
+                                                                    date: 'fa fa-calendar',
+                                                                    up: 'fa fa-chevron-up',
+                                                                    down: 'fa fa-chevron-down',
+                                                                    previous: 'fa fa-chevron-left',
+                                                                    next: 'fa fa-chevron-right',
+                                                                    today: 'fa fa-screenshot',
+                                                                    clear: 'fa fa-trash',
+                                                                    close: 'fa fa-remove'
+                                                                }
+                                                        }">
+                                                            <input type='text' class="form-control" name="expire_date_3" id="expire_date_3" required/>
+                                                            <span class="input-group-addon">
+                                                                <span class="fa fa-calendar"></span>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                </div>
+            </div>
+
+      <!--  Number of Bars  -->
+            <div class="form-group row ">
+              <label class="col-sm-4 form-control-label text-right">Number of Bars</label>
+              <div class="col-sm-8">
+                <input type="text" id="bar_size" name="bar_size" class="form-control"  required/>
+              </div>
+            </div>
+      <!--  Button  -->
+            <div class="modal-footer">
+              <button type="submit" class="btn white p-x-md" style="background-color: #2e3e4e" >Add</button>
+
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+<div id="update_security_modal" class="modal black-overlay" data-backdrop="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content box-shadow-md black lt m-b">
+        <div class="modal-header">
+      	  <div class="col-sm-12 row"  >
+                <div class="col-sm-6">
+                    <h5 class="modal-title">Edit Security Ticker</h5>
+                </div>
+                <div class="col-sm-6 text-lg-right m-m">
+                    <a class="text-info " href onclick="back_to_dashboard()"><h6>Back</h6></a>
+                </div>
+            </div>
+        </div>
+        <div class="modal-body p-lg">
+          <form  method="post">{% csrf_token %}
+            <input type="hidden" id="update_id" name="update_id">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Ticker</th>
+                        <th>Sector</th>
+                        <th>Industry</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="update_security_table">
+
+
+                </tbody>
+            </table>
+            <!--  Button  -->
+            <div class="modal-footer ">
+              <button id="add_ticker" type="button" class="btn btn-fw info">Add Ticker</button>
+              <button id="update_security" type="button" class="btn btn-fw primary">Save</button>
+
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- / .modal -->
+<!-- ############ PAGE END-->
+
+    </div>
+  </div>
+  <!-- / -->
+
+
+
+<!-- ############ LAYOUT END-->
+
+  </div>
+
+<!-- build:js scripts/app.html.js -->
+<!-- jQuery -->
+  <script src="{% static 'user/libs/jquery/jquery/dist/jquery.js' %}"></script>
+<!-- Bootstrap -->
+  <script src="{% static 'user/libs/jquery/tether/dist/js/tether.min.js' %}"></script>
+  <script src="{% static 'user/libs/jquery/bootstrap/dist/js/bootstrap.js' %}"></script>
+<!-- core -->
+  <script src="{% static 'user/libs/jquery/underscore/underscore-min.js' %}"></script>
+  <script src="{% static 'user/libs/jquery/jQuery-Storage-API/jquery.storageapi.min.js' %}"></script>
+  <script src="{% static 'user/libs/jquery/PACE/pace.min.js' %}"></script>
+  <script src="{% static 'user/scripts/config.lazyload.js' %}"></script>
+  <script src="{% static 'user/scripts/palette.js' %}"></script>
+  <script src="{% static 'user/scripts/ui-load.js' %}"></script>
+  <script src="{% static 'user/scripts/ui-jp.js' %}"></script>
+  <script src="{% static 'user/scripts/ui-include.js' %}"></script>
+  <script src="{% static 'user/scripts/ui-device.js' %}"></script>
+  <script src="{% static 'user/scripts/ui-form.js' %}"></script>
+  <script src="{% static 'user/scripts/ui-nav.js' %}"></script>
+  <script src="{% static 'user/scripts/ui-screenfull.js' %}"></script>
+  <script src="{% static 'user/scripts/ui-scroll-to.js' %}"></script>
+  <script src="{% static 'user/scripts/ui-toggle-class.js' %}"></script>
+  <script src="{% static 'user/scripts/app.js' %}"></script>
+  <!-- ajax -->
+  <script src="{% static 'user/libs/jquery/jquery-pjax/jquery.pjax.js' %}"></script>
+  <script src="{% static 'user/scripts/ajax.js' %}"></script>
+<!-- endbuild -->
+  <script src="https://code.highcharts.com/stock/highstock.js"></script>
+  <script src="https://code.highcharts.com/highcharts.js"></script>
+  <script src="https://code.highcharts.com/modules/exporting.js"></script>
+  <script src="https://code.highcharts.com/modules/export-data.js"></script>
+  <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+
+<script>
+$(document).ready(function(){
+    var interval = setInterval(function() {
+        //var momentNow = moment().tz('America/Chicago').format('YYYY-MM-DD HH:mm:ss');
+    var today = new Date(new Date() - 12*60*60*1000);
+    var date = today.getFullYear()+'-'+(today.getMonth()+1).toString().padStart(2, '0')+'-' + today.getDate().toString().padStart(2, '0');
+    var time = today.getHours().toString().padStart(2, '0') + ":" + today.getMinutes().toString().padStart(2, '0') + ":" + today.getSeconds().toString().padStart(2, '0');
+    var dateTime = date+' '+time;
+    $('#today').html(dateTime);
+    }, 100);
+
+    $('#edit_security_form').on("submit", function(e){
+          e.preventDefault();
+          var csrf_token = $('input[name=csrfmiddlewaretoken]').val();
+          var id = $('#edit_id').val();
+          var name = $('#edit_security_name').val();
+          var type = $('#edit_security_type').val();
+          var trading_day = $('#edit_trading_day').val();
+          var expire_1 = $('#edit_expire_date_1').val();
+          var expire_2 = $('#edit_expire_date_2').val();
+          var expire_3 = $('#edit_expire_date_3').val();
+          var bar_size = $('#edit_bar_size').val();
+          $.ajax({
+            method: "POST",
+            url: "/update_security/",
+            data: {id: id, name: name, type: type, trading_day: trading_day, expire_1: expire_1, expire_2: expire_2, expire_3:expire_3, bar_size: bar_size, csrfmiddlewaretoken: csrf_token},
+            success: function (result) {
+                var permission = result.permission;
+                location.reload();
+          }
+    });
+
+      });
+
+      $('#add_ticker').on('click', function(e){
+          e.preventDefault();
+          var html_str = '<tr id="new_ticker_record"><td><input type="text" id="new_ticker" class="form-control"/></td><td><input type="text" id="new_sector" class="form-control"/></td><td><input type="text" id="new_industry" class="form-control"/></td><td><a class="label info" href="#" onclick="save_ticker()">Save</a></td></tr>';
+          $('#update_security_table').append(html_str);
+      });
+
+      $('#update_security').on('click', function(e){
+         e.preventDefault() ;
+         var csrf_token = $('input[name=csrfmiddlewaretoken]').val();
+         var id = $('#update_id').val();
+         var ticker_list = [];
+         var sector_list = [];
+         var industry_list = [];
+         $('#update_security_table tr').each(function(){
+           //var temp_list = $(this).children();
+           //console.log($("td:nth-child(1)",this).text());
+           ticker_list.push($("td:nth-child(1)",this).text())  ;
+           sector_list.push($("td:nth-child(2)",this).text());
+           industry_list.push($("td:nth-child(3)",this).text())  ;
+         });
+         $.ajax({
+            method: "POST",
+            url: "/update_security_ticker/",
+            data: {id: id, ticker: ticker_list.join("|"), sector: sector_list.join("|"), industry: industry_list.join("|"), csrfmiddlewaretoken: csrf_token},
+            success: function (result) {
+                location.reload();
+            }
+         });
+      });
+});
+</script>
+<script>
+function edit_security(id)   {
+    var csrf_token = $('input[name=csrfmiddlewaretoken]').val();
+    $.ajax({
+        method: "POST",
+        url: "/get_security_info/",
+        data: {id: id, csrfmiddlewaretoken: csrf_token},
+        success: function (result) {
+            if (result == {}){
+                location.reload();
+            }else{
+                $('#edit_id').val(result.security['id']);
+                $('#edit_security_name').val(result.security['name']);
+                var security_type = result.security['type'];
+                var option_list = document.getElementById("edit_security_type").getElementsByTagName("option");
+                for(var i=0; i<option_list.length; i++){
+                    (option_list[i].value == security_type) ? option_list[i].disabled = false : option_list[i].disabled = true;
+                }
+                $('#edit_security_type').val(security_type);
+                $('#edit_trading_day').val(result.security['trading_day']);
+                $('#edit_expire_date_1').val(result.security['expire_date_1']);
+                $('#edit_expire_date_2').val(result.security['expire_date_2']);
+                $('#edit_expire_date_3').val(result.security['expire_date_3']);
+                $('#edit_bar_size').val(result.security['data_size']);
+                $('#edit_security').show();
+            }
+        }
+    });
+}
+function update_security(id){
+    var csrf_token = $('input[name=csrfmiddlewaretoken]').val();
+    $.ajax({
+        method: "POST",
+        url: "/get_security_info/",
+        data: {id: id, csrfmiddlewaretoken: csrf_token},
+        success: function (result) {
+            if (result == {}){
+                location.reload();
+            }else{
+                var ticker_list = result.ticker_list;
+                var security_id = result.security['id'];
+                var html_str = "";
+
+                for(var i =0; i<ticker_list.length; i++){
+                    var ticker = "'" + ticker_list[i][0] + "'";
+                    html_str += '<tr><td>' + ticker_list[i][0] + '</td><td>' + ticker_list[i][1] + '</td><td>' + ticker_list[i][2] + '</td><td><a class="label danger" href="#" onclick="delete_ticker(' + ticker + ')">Delete</a></td></tr>'
+                }
+                $('#update_id').val(security_id);
+                $('#update_security_table').html(html_str);
+                $('#update_security_modal').show();
+            }
+        }
+    });
+}
+function delete_ticker(ticker){
+    $('#update_security_table tr').each(function(){
+        if($("td:first-child", this).text() == ticker){
+            //console.log(ticker);
+            $(this).remove();
+
+        };
+    })
+}
+function save_ticker(){
+    var ticker = "'" + $('#new_ticker').val() + "'";
+    var html_str = '<tr><td>' + $('#new_ticker').val() + '</td><td>' + $('#new_sector').val() + '</td><td>' + $('#new_industry').val() + '</td><td><a class="label danger" href="#" onclick="delete_ticker(' + ticker + ')">Delete</a></td></tr>'
+    $('#new_ticker_record').remove();
+    $('#update_security_table').append(html_str);
+}
+function back_to_dashboard(){
+    $('#edit_security').hide();
+    $('#update_security_modal').hide();
+}
+  </script>
+</body>
+</html>

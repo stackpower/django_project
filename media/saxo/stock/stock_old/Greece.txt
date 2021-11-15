@@ -1,0 +1,4 @@
+{
+	"source": "XATH",
+	"ticker": "ELPE,MOH,ETE"
+}

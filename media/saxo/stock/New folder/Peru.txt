@@ -1,0 +1,4 @@
+{
+	"source": "XNYS,",
+	"ticker: "BVN,BAP,SCCO,SPAC,GRAM"
+}

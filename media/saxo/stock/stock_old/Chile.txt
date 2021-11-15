@@ -1,0 +1,4 @@
+{
+	"source": "XNYS",
+	"ticker": "CCU,SQM,BCH,BSAC,ENIA,ENIC,LTM,AKO_A,AKO_B,GPRK"
+}

@@ -1,0 +1,32 @@
+{ "aaData": [
+	{
+		"absID": "1",
+		"username": "aaa",
+		"email": "aaa",
+		"create_date": "aaa",
+		"bill_amount": "aaa",
+		"account_growth": "aaa",
+		"capital": "aaa",
+		"exchange_count": "aaa",
+		"coin_pair_count": "aaa",
+		"strategy_count": "aaa",
+		"fee": "aaa",
+		"bill_status": "aaa",
+		"trading_status": "aaa"
+	},
+	{
+		"absID": "2",
+		"username": "bbb",
+		"email": "bbb",
+		"create_date": "bbb",
+		"bill_amount": "bbb",
+		"account_growth": "bbb",
+		"capital": "bbb",
+		"exchange_count": "bbb",
+		"coin_pair_count": "bbb",
+		"strategy_count": "bbb",
+		"fee": "bbb",
+		"bill_status": "bbb",
+		"trading_status": "bbb"
+	}
+] }

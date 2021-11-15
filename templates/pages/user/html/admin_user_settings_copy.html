@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Analytical Option Navigator</title>
+  <meta name="description" content="Admin, Dashboard, Bootstrap, Bootstrap 4, Angular, AngularJS" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimal-ui" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  {% load staticfiles %}
+  <!-- for ios 7 style, multi-resolution icon of 152x152 -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-barstyle" content="black-translucent">
+  <link rel="apple-touch-icon" href="../static/user/assets/images/logo.png">
+  <meta name="apple-mobile-web-app-title" content="Flatkit">
+  <!-- for Chrome on Android, multi-resolution icon of 196x196 -->
+  <meta name="mobile-web-app-capable" content="yes">
+  {% comment %}<link rel="shortcut icon" sizes="196x196" href="../static/user/assets/images/logo.png">{% endcomment %}
+  <link rel="icon" type="image/png" href="{% static 'landingpage/icon/favicon-32x32.png' %}" sizes="32x32">
+  <link rel="apple-touch-icon" href="{% static 'landingpage/icon/favicon-32x32.png' %}">
+
+  <!-- style -->
+  <link rel="stylesheet" href="../static/user/assets/animate.css/animate.min.css" type="text/css" />
+  <link rel="stylesheet" href="../static/user/assets/glyphicons/glyphicons.css" type="text/css" />
+  <link rel="stylesheet" href="../static/user/assets/font-awesome/css/font-awesome.min.css" type="text/css" />
+  <link rel="stylesheet" href="../static/user/assets/material-design-icons/material-design-icons.css" type="text/css" />
+
+  <link rel="stylesheet" href="../static/user/assets/bootstrap/dist/css/bootstrap.min.css" type="text/css" />
+  <!-- build:css ../assets/styles/app.min.css -->
+  <link rel="stylesheet" href="../static/user/assets/styles/app.css" type="text/css" />
+  <!-- endbuild -->
+  <link rel="stylesheet" href="../static/user/assets/styles/font.css" type="text/css" />
+  <link rel="stylesheet" type="text/css" href="../static/user/libs/jquery/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css">
+  <link rel="stylesheet" type="text/css" href="../static/user/libs/jquery/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.dark.css">
+  <link rel="stylesheet" type="text/css" href="../static/user/libs/jquery/footable/css/footable.core.css">
+
+  <script src="../static/user/libs/jquery/jquery/dist/jquery.js"></script>
+    <script type="text/javascript">
+function edit_user(id)   {
+    var csrf_token = $('input[name=csrfmiddlewaretoken]').val();
+    $.ajax({
+        method: "POST",
+        url: "/get_user_info/",
+        data: {id: id, csrfmiddlewaretoken: csrf_token},
+        success: function (result) {
+            $('#sure_name').val(result.user['sure_name']);
+            $('#user_id').val(result.user['user_id']);
+            $('#password').val(result.user['password']);
+            $('#phone_number').val(result.user['phone_number']);
+            $('#status').val(result.user['status']);
+            $('#expire_date').val(result.user['expire_date']);
+            $('#saxo_token').val(result.user['saxo_token']);
+            $('#ib_user_name').val(result.user['ib_user_name']);
+            $('#ib_id').val(result.user['ib_id']);
+            $('#ib_port').val(result.user['ib_port']);
+            $('#edit_user_modal').show();
+        }
+    });
+}
+</script>
+</head>
+<body class="dark">
+  <div class="app" id="app">
+
+<!-- ############ LAYOUT START-->
+
+  <!-- aside -->
+  <div id="aside" class="app-aside modal nav-dropdown">
+  	<!-- fluid app aside -->
+    <div class="left navside dark dk" data-layout="column">
+  	  <div class="navbar no-radius">
+        <!-- brand -->
+        <a class="navbar-brand">
+        	{% comment %}<div ui-include="'../static/user/assets/images/logo.svg'"></div>{% endcomment %}
+        	<img src="../static/landingpage/img/title.png" alt="." >
+        	{% comment %}<span class="hidden-folded inline">Site Name</span>{% endcomment %}
+        </a>
+        <!-- / brand -->
+      </div>
+      <div class="hide-scroll" data-flex>
+          <nav class="scroll nav-light">
+              <ul class="nav" ui-nav>
+                {% comment %}<li class="nav-header hidden-folded">
+                  <small class="text-muted">Main</small>
+                </li>{% endcomment %}
+      <!-- Dashboard -->
+                <li>
+                  <a href="/admin_dashboard" >
+                    <div class="row">
+                      <span class="nav-icon fa fa-dashboard" style="margin-left: 10px">
+                      </span>
+                      <span class="nav-text">Dashboard</span>
+                    </div>
+                  </a>
+                </li>
+      <!-- Users -->
+                <li>
+                  <a href="/admin_user_setting" >
+                    <div class="row">
+                      <span class="nav-icon fa fa-users" style="margin-left: 10px">
+                      </span>
+                      <span class="nav-text">Users</span>
+                    </div>
+                  </a>
+                </li>
+      <!-- strategy -->
+                <li>
+                  <a href="/strategy_book">
+                    <div class="row">
+                      <span class="nav-icon fa fa-database" style="margin-left: 10px">
+                      </span>
+                      <span class="nav-text">Strategy Settings</span>
+                    </div>
+                  </a>
+                </li>
+      <!-- Reporting -->
+                <li>
+                  <a href="/reporting">
+                    <div class="row">
+                      <span class="nav-icon fa fa-bars" style="margin-left: 10px">
+                      </span>
+                      <span class="nav-text">Reporting</span>
+                    </div>
+                  </a>
+                </li>
+      {% comment %}<!-- Subscription -->
+                <li>
+                  <a href="/trading">
+                    <div class="row">
+                      <span class="nav-icon fa fa-tags" style="margin-left: 10px">
+                      </span>
+                      <span class="nav-text">Subscription Plan</span>
+                    </div>
+                  </a>
+                </li>
+      <!-- Payment -->
+                <li>
+                  <a href="/history">
+                    <div class="row">
+                      <span class="nav-icon fa fa-money" style="margin-left: 10px">
+                      </span>
+                      <span class="nav-text">Payment Gateway</span>
+                    </div>
+                  </a>
+                </li>
+      <!-- Exchange information -->
+                <li>
+                  <a href="/exchange_info">
+                    <div class="row">
+                      <span class="nav-icon fa fa-key" style="margin-left: 10px">
+                      </span>
+                      <span class="nav-text">Exchange</span>
+                    </div>
+                  </a>
+                </li>
+      <!-- Affiliate -->
+                <li>
+                  <a href="/user_setting">
+                    <div class="row">
+                      <span class="nav-icon fa fa-ticket" style="margin-left: 10px">
+                      </span>
+                      <span class="nav-text">Affiiate</span>
+                    </div>
+                  </a>
+                </li>
+      <!-- Email templates -->
+                <li>
+                  <a href="/user_setting">
+                    <div class="row">
+                      <span class="nav-icon fa fa-envelope" style="margin-left: 10px">
+                      </span>
+                      <span class="nav-text">Email Templates</span>
+                    </div>
+                  </a>
+                </li>
+      <!-- Logs -->
+                <li>
+                  <a href="/history">
+                    <div class="row">
+                      <span class="nav-icon fa fa-bars" style="margin-left: 10px">
+                      </span>
+                      <span class="nav-text">Logs</span>
+                    </div>
+                  </a>
+                </li>
+      <!-- Landingpage Content -->
+                <li>
+                  <a href="/doc_manage">
+                    <div class="row">
+                      <span class="nav-icon fa fa-sitemap" style="margin-left: 10px">
+                      </span>
+                      <span class="nav-text">Document Manage</span>
+                    </div>
+                  </a>
+                </li>
+      <!-- Languages -->
+                <li>
+                  <a href="/user_setting">
+                    <div class="row">
+                      <span class="nav-icon fa fa-language" style="margin-left: 10px">
+                      </span>
+                      <span class="nav-text">Languages</span>
+                    </div>
+                  </a>
+                </li>
+      <!-- Backup -->
+                <li>
+                  <a href="/user_setting">
+                    <div class="row">
+                      <span class="nav-icon fa fa-database" style="margin-left: 10px">
+                      </span>
+                      <span class="nav-text">Backup</span>
+                    </div>
+                  </a>
+                </li>{% endcomment %}
+              </ul>
+          </nav>
+      </div>
+      {% comment %}<div class="b-t">
+        <div class="nav-fold">
+        	<a href="profile.html">
+        	    <span class="pull-left">
+        	      <img src="{% static 'user/assets/images/a0.jpg' %}" alt="..." class="w-40 img-circle">
+        	    </span>
+        	    <span class="clear hidden-folded p-x">
+        	      <span class="block _500">Jean Reyes</span>
+        	      <small class="block text-muted"><i class="fa fa-circle text-success m-r-sm"></i>online</small>
+        	    </span>
+        	</a>
+        </div>
+      </div>{% endcomment %}
+    </div>
+  </div>
+  <!-- / -->
+
+  <!-- content -->
+  <div id="content" class="app-content box-shadow-z0" role="main">
+    <div class="app-header white box-shadow">
+        <div class="navbar navbar-toggleable-sm flex-row align-items-center">
+            <!-- Open side - Naviation on mobile -->
+            <a data-toggle="modal" data-target="#aside" class="hidden-lg-up mr-3">
+              <i class="material-icons">&#xe5d2;</i>
+            </a>
+            <!-- / -->
+
+            <!-- Page title - Bind to $state's title -->
+            <div class="mb-0 h5 no-wrap" ng-bind="$state.current.data.title" id="pageTitle"></div>
+
+            <!--  Content Title  -->
+            <div class="mb-2">
+              <h3 style="margin-bottom: 0px">User Settings</h3>
+              <div ui-include="'../views/blocks/navbar.form.html'"></div>
+            </div>
+            <!-- / navbar collapse -->
+
+            <!-- navbar right -->
+            {% comment %}<ul class="nav navbar-nav ml-auto flex-row">
+              <li class="nav-item dropdown pos-stc-xs">
+                <a class="nav-link mr-2" href data-toggle="dropdown">
+                  <i class="material-icons">&#xe7f5;</i>
+                  <span class="label label-sm up warn">3</span>
+                </a>
+                <div ui-include="'../views/blocks/dropdown.notification.html'"></div>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link p-0 clear" href="#" data-toggle="dropdown">
+                  <span class="avatar w-32">
+                    <img src="../static/user/assets/images/a0.jpg" alt="...">
+                    <i class="on b-white bottom"></i>
+                  </span>
+                </a>
+                <div ui-include="'../views/blocks/dropdown.user.html'"></div>
+              </li>
+              <li class="nav-item hidden-md-up">
+                <a class="nav-link pl-2" data-toggle="collapse" data-target="#collapse">
+                  <i class="material-icons">&#xe5d4;</i>
+                </a>
+              </li>
+            </ul>{% endcomment %}
+            <!-- / navbar right -->
+        </div>
+    </div>
+    <div class="app-footer">
+      <div class="p-2 text-xs">
+        <div class="pull-right text-muted py-1">
+          &copy; <strong>OPTIONPARIS.COM</strong> <span class="hidden-xs-down">- Analytical Option Navigator <img width="20px" height="22px" src="../../../../static/landingpage/icon/heart.png"></span>
+        </div>
+        {% comment %}<div class="nav">
+          <a class="nav-link" href="{% static 'user/' %}">About</a>
+          <a class="nav-link" href="http://themeforest.net/user/flatfull/portfolio?ref=flatfull">Get it</a>
+        </div>{% endcomment %}
+      </div>
+    </div>
+    <div ui-view class="app-body" id="view">
+
+<!-- ############ PAGE START-->
+    <div class="padding">
+      {% include 'pages/message.html' %}
+      <div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="box">
+                    <div class="box-header">
+                        <h2>Account Form</h2>
+                    </div>
+                    <div class="m-0" style="border-bottom: 3px solid rgba(120, 130, 140, 0.13)"></div>
+                    <div class="box-body">
+                        <form action="" method="post">{% csrf_token %}
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="b-b b-primary nav-active-primary">
+                                    <ul class="nav nav-tabs">
+                                        <li class="nav-item">
+                                            <a class="nav-link" href data-toggle="tab" data-target="#tab1">All Users</a>
+                                        </li>
+                                        <li class="nav-item dropdown" style="position: absolute; right: 70px">
+                                            <a class="nav-link" href data-toggle="modal" data-target="#add_account">
+                                                <i class="fa fa-fw fa-plus text-muted"></i>
+                                                <span>Add User</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="tab-content p-a m-b-md">
+                                    <div class="tab-pane active" id="tab1">
+                                        <div class="box">
+                                            <div class="box-body">
+                                                Search: <input id="filter" type="text" class="form-control input-sm w-auto inline m-r"/>
+                                            </div>
+                                            <div>
+                                                <table class="table m-b-none" ui-jp="footable" data-filter="#filter" data-page-size="5">
+                                                    <thead>
+                                                        <tr>
+                                                            <th data-toggle="true">Sure Name</th>
+                                                            <th>ID</th>
+                                                            <th>User Type</th>
+                                                            <th data-hide="phone">Phone</th>
+                                                            <th data-hide="phone,tablet" >Expire Date</th>
+                                                            <th data-hide="Saxo Bank 24 hour token">Saxo Token</th>
+                                                            <th>Status</th>
+                                                            <th>Action</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    {% if user_list %}
+                                                        {% for user in user_list %}
+                                                        <tr id>
+                                                            <td>{{user.sure_name}}</td>
+                                                            <td>{{ user.user_id }}</td>
+                                                            <td >
+                                                                {% if user.permission == 1 %}
+                                                                    <span class="label danger" >Administrator</span>
+                                                                {% else %}
+                                                                    <span class="label primary" >User</span>
+                                                                {% endif %}
+                                                            </td>
+
+                                                            <td>{{ user.phone_number }}</td>
+                                                            <td>{{ user.expire_date }}</td>
+                                                            {% if user.saxo_token == "" %}
+                                                                <td><span class="label danger">No</span></td>
+                                                            {% else %}
+                                                                <td><span class="label primary" title="{{ user.saxo_token }}">Yes</span></td>
+                                                            {% endif %}
+                                                            {% if user.status == "disable" %}
+                                                                <td><a class="label danger" title="Go to Enable">Disable</a></td>
+                                                            {% elif user.status == "enable" %}
+                                                                <td><a class="label primary" title="Go to Disable" >Enable</a></td>
+                                                            {% endif %}
+                                                            <td><a class="label info" href="#" onclick="edit_user({{ user.id }})">Edit</a></td>
+                                                        </tr>
+                                                        {% endfor %}
+                                                    {% endif %}
+
+                                                    </tbody>
+                                                    <tfoot class="hide-if-no-paging">
+                                                        <tr>
+                                                            <td colspan="5" class="text-center">
+                                                                <ul class="pagination"></ul>
+                                                            </td>
+                                                        </tr>
+                                                    </tfoot>
+                                                </table>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+      </div>
+    </div>
+
+<!-- .modal -->
+{% comment %}<div id="add_account" class="modal black-overlay" data-backdrop="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content box-shadow-md black lt m-b">
+        <div class="modal-header">
+      	  <h5 class="modal-title">Add New Account</h5>
+        </div>
+        <div class="modal-body p-lg">
+          <form action="{% url 'add_user' %}" method="post">{% csrf_token %}
+      <!--  Account name  -->
+            <div class="form-group row">
+              <label class="col-sm-3 form-control-label" style="text-align: right">Account Name</label>
+              <div class="col-sm-9">
+                <input type="text" name="account_name" class="form-control"  required>
+              </div>
+            </div>
+      <!--  Account Type  -->
+            <div class="form-group row">
+              <label class="col-sm-3 form-control-label m-m" style="text-align: right">Account Type</label>
+              <div class="col-sm-9">
+                <select required name="account_type" id="account_type" onchange="change_exchange('rsi_exchange')" style="background-color: rgb(72,87,103);" class="form-control c-select m-m">
+                    <option value="test">TestNet Account</option>
+                    <option value="live">Live Account</option>
+                </select>
+              </div>
+            </div>
+      <!--  API Key  -->
+            <div class="form-group row">
+              <label class="col-sm-3 form-control-label" style="text-align: right">API Key</label>
+              <div class="col-sm-9">
+                <input type="text" name="api_key" class="form-control"  required>
+              </div>
+            </div>
+      <!--  API Secret  -->
+            <div class="form-group row">
+              <label class="col-sm-3 form-control-label" style="text-align: right">API Secret</label>
+              <div class="col-sm-9">
+                <input type="text" name="secret_key" class="form-control"  required>
+              </div>
+            </div>
+      <!--  Button  -->
+            <div class="modal-footer">
+              <button type="button" class="btn white p-x-md" style="background-color: #2e3e4e" data-dismiss="modal">Cancel</button>
+              <button type="submit" class="btn white p-x-md" style="background-color: #2e3e4e" >Add</button>
+
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>{% endcomment %}
+<div id="add_account" class="modal black-overlay" data-backdrop="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content box-shadow-md black lt m-b">
+        <div class="modal-header">
+      	  <h5 class="modal-title">Edit User</h5>
+        </div>
+        <div class="modal-body p-lg">
+          <form action="{% url 'add_user' %}" method="post">{% csrf_token %}
+      <!--  Sure name  -->
+            <div class="form-group row">
+              <label class="col-sm-3 form-control-label" style="text-align: right">Sure Name</label>
+              <div class="col-sm-9">
+                <input type="text" id="sure_name" name="sure_name" class="form-control"  required>
+              </div>
+            </div>
+      <!--   User ID  -->
+            <div class="form-group row">
+              <label class="col-sm-3 form-control-label m-m" style="text-align: right">User ID</label>
+              <div class="col-sm-9">
+                <input type="text" id="user_id" name="user_id" class="form-control"  required>
+              </div>
+            </div>
+      <!--  Password  -->
+            <div class="form-group row">
+              <label class="col-sm-3 form-control-label" style="text-align: right">Password</label>
+              <div class="col-sm-9">
+                <input type="text" id="password" name="password" class="form-control"  required>
+              </div>
+            </div>
+      <!--  Phone Number  -->
+            <div class="form-group row">
+              <label class="col-sm-3 form-control-label" style="text-align: right">Phone Number</label>
+              <div class="col-sm-9">
+                <input type="text" id="phone_number" name="Phone Number" class="form-control"  required>
+              </div>
+            </div>
+      <!--  Status -->
+            <div class="form-group row">
+              <label class="col-sm-3 form-control-label m-m" style="text-align: right">User Status</label>
+              <div class="col-sm-9">
+                <select required name="account_type" id="status" style="background-color: rgb(72,87,103);" class="form-control c-select m-m">
+                    <option value="enable">Enable</option>
+                    <option value="disable">Disable</option>
+                </select>
+              </div>
+            </div>
+      <!--  Expire Date -->
+            <div class="form-group row">
+                <label class="col-sm-3 form-control-label m-m" style="text-align: right">Expire Date</label>
+                <div class="col-sm-9">
+                    <div class="form-group">
+                                                        <div class='input-group date' ui-jp="datetimepicker" ui-options="{
+                                                            format: 'YYYY-M-D',
+                                                                icons: {
+                                                                    time: 'fa fa-clock-o',
+                                                                    date: 'fa fa-calendar',
+                                                                    up: 'fa fa-chevron-up',
+                                                                    down: 'fa fa-chevron-down',
+                                                                    previous: 'fa fa-chevron-left',
+                                                                    next: 'fa fa-chevron-right',
+                                                                    today: 'fa fa-screenshot',
+                                                                    clear: 'fa fa-trash',
+                                                                    close: 'fa fa-remove'
+                                                                }
+                                                        }">
+                                                            <input type='text' class="form-control" name="expire_date" id="expire_date" required>
+                                                            <span class="input-group-addon">
+                                                                <span class="fa fa-calendar"></span>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                </div>
+            </div>
+
+      <!--  IB TWS ID  -->
+            <div class="form-group row">
+              <label class="col-sm-3 form-control-label" style="text-align: right">TWS User Name</label>
+              <div class="col-sm-9">
+                <input type="text" id="ib_user_name" name="ib_user_name" class="form-control"  required>
+              </div>
+            </div>
+      <!--   API Master ID  -->
+            <div class="form-group row">
+              <label class="col-sm-3 form-control-label m-m" style="text-align: right">TWS API ID</label>
+              <div class="col-sm-9">
+                <input type="text" id="ib_id" name="ib_id" class="form-control"  required>
+              </div>
+            </div>
+      <!--  Port Number  -->
+            <div class="form-group row">
+              <label class="col-sm-3 form-control-label" style="text-align: right">Port Number</label>
+              <div class="col-sm-9">
+                <input type="text" id="ib_port" name="ib_port" class="form-control"  required>
+              </div>
+            </div>
+      <!--  Saxo Token  -->
+            <div class="form-group row">
+              <label class="col-sm-3 form-control-label" style="text-align: right">Saxo Token</label>
+              <div class="col-sm-9">
+                <textarea id="saxo_token" name="saxo_token" class="form-control"/>
+              </div>
+            </div>
+      <!--  Button  -->
+            <div class="modal-footer">
+              {% comment %}<button type="button" class="btn white p-x-md" style="background-color: #2e3e4e" data-dismiss="modal">Cancel</button>{% endcomment %}
+              <button type="submit" class="btn white p-x-md" style="background-color: #2e3e4e" >Update</button>
+
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- / .modal -->
+
+<!-- ############ PAGE END-->
+
+    </div>
+  </div>
+
+
+<!-- ############ LAYOUT END-->
+
+  </div>
+<!-- build:js scripts/app.html.js -->
+<!-- jQuery -->
+
+<!-- Bootstrap -->
+  <script src="../static/user/libs/jquery/tether/dist/js/tether.min.js"></script>
+  <script src="../static/user/libs/jquery/bootstrap/dist/js/bootstrap.js"></script>
+<!-- core -->
+  <script src="../static/user/libs/jquery/underscore/underscore-min.js"></script>
+  <script src="../static/user/libs/jquery/jQuery-Storage-API/jquery.storageapi.min.js"></script>
+  <script src="../static/user/libs/jquery/PACE/pace.min.js"></script>
+
+  <script src="../static/user/scripts/config.lazyload.js"></script>
+
+  <script src="../static/user/scripts/palette.js"></script>
+  <script src="../static/user/scripts/ui-load.js"></script>
+  <script src="../static/user/scripts/ui-jp.js"></script>
+  <script src="../static/user/scripts/ui-include.js"></script>
+  <script src="../static/user/scripts/ui-device.js"></script>
+  <script src="../static/user/scripts/ui-form.js"></script>
+  <script src="../static/user/scripts/ui-nav.js"></script>
+  <script src="../static/user/scripts/ui-screenfull.js"></script>
+  <script src="../static/user/scripts/ui-scroll-to.js"></script>
+  <script src="../static/user/scripts/ui-toggle-class.js"></script>
+
+  <script src="../static/user/scripts/app.js"></script>
+
+  <!-- ajax -->
+  <script src="../static/user/libs/jquery/jquery-pjax/jquery.pjax.js"></script>
+  <script src="../static/user/scripts/ajax.js"></script>
+<!-- endbuild -->
+  <script src="../static/user/libs/js/moment/moment.js"></script>
+  <script src="../static/user/libs/jquery/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+  <script src="../static/user/libs/jquery/footable/dist/footable.all.min.js"></script>
+<script>
+  $(document).ready(function(){
+
+  })
+</script>
+
+</body>
+</html>

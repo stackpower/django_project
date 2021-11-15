@@ -1,0 +1,4 @@
+{
+	"source": "XWAR",
+	"ticker": "ACP,BHW,PEO,BRS,GTC,LTS,JSW,KER,KGH,LWB,PGE,PKN,PGN,PKO,PZU,SNS,TPE"
+}

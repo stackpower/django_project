@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Analytical Option Navigator</title>
+  <meta name="description" content="Admin, Dashboard, Bootstrap, Bootstrap 4, Angular, AngularJS" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimal-ui" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  {% load staticfiles %}
+  <!-- for ios 7 style, multi-resolution icon of 152x152 -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-barstyle" content="black-translucent">
+  <link rel="apple-touch-icon" href="../static/user/assets/images/logo.png">
+  <meta name="apple-mobile-web-app-title" content="Flatkit">
+  <!-- for Chrome on Android, multi-resolution icon of 196x196 -->
+  <meta name="mobile-web-app-capable" content="yes">
+  {% comment %}<link rel="shortcut icon" sizes="196x196" href="../static/user/assets/images/logo.png">{% endcomment %}
+  <link rel="icon" type="image/png" href="{% static 'landingpage/icon/favicon-32x32.png' %}" sizes="32x32">
+  <link rel="apple-touch-icon" href="{% static 'landingpage/icon/favicon-32x32.png' %}">
+
+  <!-- style -->
+  <link rel="stylesheet" href="../static/user/assets/animate.css/animate.min.css" type="text/css" />
+  <link rel="stylesheet" href="../static/user/assets/glyphicons/glyphicons.css" type="text/css" />
+  <link rel="stylesheet" href="../static/user/assets/font-awesome/css/font-awesome.min.css" type="text/css" />
+  <link rel="stylesheet" href="../static/user/assets/material-design-icons/material-design-icons.css" type="text/css" />
+
+  <link rel="stylesheet" href="../static/user/assets/bootstrap/dist/css/bootstrap.min.css" type="text/css" />
+  <!-- build:css ../assets/styles/app.min.css -->
+  <link rel="stylesheet" href="../static/user/assets/styles/app.css" type="text/css" />
+  <!-- endbuild -->
+  <link rel="stylesheet" href="{% static 'user/assets/styles/font.css' %}" type="text/css" />
+  {% comment %}<link rel="stylesheet" type="text/css" href="{% static 'user/libs/jquery/footable/css/footable.core.css' %}"  />{% endcomment %}
+</head>
+<body class="dark">
+  <div class="app" id="app">
+
+<!-- ############ LAYOUT START-->
+
+  <!-- aside -->
+  <div id="aside" class="app-aside modal nav-dropdown">
+  	<!-- fluid app aside -->
+    <div class="left navside dark dk" data-layout="column">
+  	  <div class="navbar no-radius">
+        <!-- brand -->
+        <a class="navbar-brand">
+        	{% comment %}<div ui-include="'../static/user/assets/images/logo.svg'"></div>{% endcomment %}
+        	<img src="../static/landingpage/img/title.png" alt="." >
+        	{% comment %}<span class="hidden-folded inline">Site Name</span>{% endcomment %}
+        </a>
+        <!-- / brand -->
+      </div>
+      <div class="hide-scroll" data-flex>
+          <nav class="scroll nav-light">
+              <ul class="nav" ui-nav>
+                {% comment %}<li class="nav-header hidden-folded">
+                  <small class="text-muted">Main</small>
+                </li>{% endcomment %}
+      <!-- Dashboard -->
+                <li>
+                  <a href={% url 'dashboard' id='all'%} >
+                    <div class="row">
+                      <span class="nav-icon fa fa-dashboard" style="margin-left: 10px">
+                      </span>
+                      <span class="nav-text">Security List</span>
+                    </div>
+                  </a>
+                </li>
+      <!-- Account Setting -->
+                <li>
+                  <a href="/account_setting">
+                    <div class="row">
+                      <span class="nav-icon fa fa-database" style="margin-left: 10px">
+                      </span>
+                      <span class="nav-text">Account Settings</span>
+                    </div>
+                  </a>
+                </li>
+              </ul>
+          </nav>
+      </div>
+    </div>
+  </div>
+  <!-- / -->
+
+  <!-- content -->
+  <div id="content" class="app-content box-shadow-z0" role="main">
+    <div class="app-header white box-shadow">
+        <div class="navbar navbar-toggleable-sm flex-row align-items-center">
+            <!-- Open side - Naviation on mobile -->
+            <a data-toggle="modal" data-target="#aside" class="hidden-lg-up mr-3">
+              <i class="material-icons">&#xe5d2;</i>
+            </a>
+            <!-- / -->
+
+            <!-- Page title - Bind to $state's title -->
+            <div class="mb-0 h5 no-wrap" ng-bind="$state.current.data.title" id="pageTitle"></div>
+
+            <!-- navbar collapse -->
+            <div class="collapse navbar-collapse" id="collapse">
+
+              <ul class="nav navbar-nav mr-auto">
+                <li class="nav-item dropdown">
+                    <h4 style="margin-bottom: 0px">Today: <span id="today">{{ today }}(Chicago TimeZone)</span></h4>
+                    {% comment %}<small class="text-muted">Today: <strong id="today"></strong> </small>{% endcomment %}
+                </li>
+              </ul>
+              <div ui-include="{% static 'user/views/blocks/navbar.form.html' %}"></div>
+              <!-- / -->
+            </div>
+
+        </div>
+    </div>
+    <div class="app-footer">
+      <div class="p-2 text-xs">
+        <div class="pull-right text-muted py-1">
+          &copy; <strong>OPTIONPARIS.COM</strong> <span class="hidden-xs-down">- Analytical Option Navigator <img width="20px" height="22px" src="../../../../static/landingpage/icon/heart.png"></span>
+        </div>
+        {% comment %}<div class="nav">
+          <a class="nav-link" href="{% static 'user/' %}">About</a>
+          <a class="nav-link" href="http://themeforest.net/user/flatfull/portfolio?ref=flatfull">Get it</a>
+        </div>{% endcomment %}
+      </div>
+    </div>
+    <div ui-view class="app-body" id="view">
+
+<!-- ############ PAGE START-->
+    <div class="padding">
+      {% include 'pages/message.html' %}
+      <div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="box">
+                    <div class="box-header">
+                        <h2>Account Settings</h2>
+                    </div>
+                    <div class="m-0" style="border-bottom: 3px solid rgba(120, 130, 140, 0.13)"></div>
+                    <div class="box-body">
+                        <form action="" method="post">{% csrf_token %}
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="b-b b-primary nav-active-primary">
+                                    <ul class="nav nav-tabs">
+                                        <li class="nav-item">
+                                            <a class="nav-link active" href data-toggle="tab" data-target="#tab_saxo_account">Saxo Bank</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link " href data-toggle="tab" data-target="#tab_ib_account">Interactive Brokers</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="tab-content p-a m-b-md">
+                                    <div class="tab-pane active" id="tab_saxo_account">
+                                        <div class="form-group row">
+                                            <label class="col-sm-2 form-control-label" style="text-align: right">24 Hour Token</label>
+                                            <div class="col-sm-10">
+                                                <textarea id="saxo_token" name="saxo_token" class="form-control" rows="5" required>{{ account_info.saxo_token }}</textarea>
+                                                <h6 class="text-muted">You can get 24 hour token from link: https://www.developer.saxo/openapi/token</h6>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-2 form-control-label" style="text-align: right">Account Keys</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" id="saxo_account_key" name="saxo_account_key" class="form-control" value="{{ account_info.saxo_account_key }}" required/>
+                                                <h6 class="text-muted">You can get Account Keys from link: https://www.developer.saxo/openapi/tutorial#/4</h6>
+                                            </div>
+                                        </div>
+                                        <div class="text-right">
+                                            <a id="saxo_account_update" name="saxo_account_update" type="button" class="btn primary">Update</a>
+                                        </div>
+                                    </div>
+                                    <div class="tabl-pane" id="tab_ib_account">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+      </div>
+    </div>
+<!-- .modal -->
+<div id="edit_user" class="modal black-overlay" data-backdrop="true">
+    <div class="modal-dialog">
+      <div class="modal-content box-shadow-md black lt m-b">
+        <div class="modal-header">
+            <div class="col-sm-12 row"  >
+                <div class="col-sm-6">
+                    <h3 class="modal-title">Edit User</h3>
+                </div>
+                <div class="col-sm-6 text-lg-right m-m">
+                    <a class="text-info " href="{% url 'admin_user_setting' %}"><h6>Back</h6></a>
+                </div>
+            </div>
+
+        </div>
+        <div class="modal-body p-lg">
+          <form action="{% url 'update_user' %}" method="post">{% csrf_token %}
+            <input type="hidden" id="edit_id" name="edit_id">
+      <!--  Sure name  -->
+            <div class="form-group row">
+              <label class="col-sm-4 form-control-label" style="text-align: right">Sure Name</label>
+              <div class="col-sm-8">
+                <input type="text" id="edit_sure_name" name="edit_sure_name" class="form-control"  required>
+              </div>
+            </div>
+      <!--   User ID  -->
+            <div class="form-group row">
+              <label class="col-sm-4 form-control-label" style="text-align: right">User ID</label>
+              <div class="col-sm-8">
+                <input type="text" id="edit_user_id" name="edit_user_id" class="form-control"  required>
+              </div>
+            </div>
+      <!--  Password  -->
+            <div class="form-group row">
+              <label class="col-sm-4 form-control-label" style="text-align: right">Password</label>
+              <div class="col-sm-8">
+                <input type="text" id="edit_password" name="edit_password" class="form-control"  required>
+              </div>
+            </div>
+      <!--  Phone Number  -->
+            <div class="form-group row">
+              <label class="col-sm-4 form-control-label" style="text-align: right">Phone Number</label>
+              <div class="col-sm-8">
+                <input type="text" id="edit_phone_number" name="edit_phone_number" class="form-control"  required>
+              </div>
+            </div>
+      <!--  Status -->
+            <div class="form-group row">
+              <label class="col-sm-4 form-control-label" style="text-align: right">User Status</label>
+              <div class="col-sm-8">
+                <select required name="edit_status" multiple id="edit_status" style="background-color: rgb(72,87,103);" class="form-control c-select">
+                    <option value="enable">Enable</option>
+                    <option value="disable">Disable</option>
+                </select>
+              </div>
+            </div>
+      <!--  Expire Date -->
+            <div class="form-group row">
+                <label class="col-sm-4 form-control-label" style="text-align: right">Expire Date</label>
+                <div class="col-sm-8">
+                    <div class="form-group">
+                                                        <div class='input-group date' ui-jp="datetimepicker" ui-options="{
+                                                            format: 'YYYY-M-D',
+                                                                icons: {
+                                                                    time: 'fa fa-clock-o',
+                                                                    date: 'fa fa-calendar',
+                                                                    up: 'fa fa-chevron-up',
+                                                                    down: 'fa fa-chevron-down',
+                                                                    previous: 'fa fa-chevron-left',
+                                                                    next: 'fa fa-chevron-right',
+                                                                    today: 'fa fa-screenshot',
+                                                                    clear: 'fa fa-trash',
+                                                                    close: 'fa fa-remove'
+                                                                }
+                                                        }">
+                                                            <input type='text' class="form-control" name="edit_expire_date" id="edit_expire_date" required>
+                                                            <span class="input-group-addon">
+                                                                <span class="fa fa-calendar"></span>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                </div>
+            </div>
+      <!--  IB TWS User Name  -->
+            <div class="form-group row">
+              <label class="col-sm-4 form-control-label" style="text-align: right">TWS User Name</label>
+              <div class="col-sm-8">
+                <input type="text" id="edit_ib_user_name" name="edit_ib_user_name" class="form-control"  required>
+              </div>
+            </div>
+      <!--   API Master ID  -->
+            <div class="form-group row">
+              <label class="col-sm-4 form-control-label m-m" style="text-align: right">TWS API ID</label>
+              <div class="col-sm-8">
+                <input type="text" id="edit_ib_id" name="edit_ib_id" class="form-control"  required>
+              </div>
+            </div>
+      <!--  Port Number  -->
+            <div class="form-group row">
+              <label class="col-sm-4 form-control-label" style="text-align: right">Port Number</label>
+              <div class="col-sm-8">
+                <input type="text" id="edit_ib_port" name="edit_ib_port" class="form-control"  required>
+              </div>
+            </div>
+      <!--  Saxo Token  -->
+            <div class="form-group row">
+              <label class="col-sm-4 form-control-label" style="text-align: right">Saxo Token</label>
+              <div class="col-sm-8">
+                  <textarea id="edit_saxo_token" name="edit_saxo_token" rows="5" class="form-control"></textarea>
+              </div>
+            </div>
+      <!--  Button  -->
+            <div class="modal-footer">
+              {% comment %}<button type="button" class="btn white p-x-md" style="background-color: #2e3e4e" data-dismiss="modal">Cancel</button>{% endcomment %}
+              <button type="submit" class="btn white p-x-md" style="background-color: #2e3e4e" >Update</button>
+
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+<div id="add_account" class="modal black-overlay" data-backdrop="true">
+    <div class="modal-dialog">
+      <div class="modal-content box-shadow-md black lt m-b">
+        <div class="modal-header">
+      	  <h5 class="modal-title">Add User</h5>
+        </div>
+        <div class="modal-body p-lg">
+          <form action="{% url 'add_user' %}" method="post">{% csrf_token %}
+      <!--  Sure name  -->
+            <div class="form-group row">
+              <label class="col-sm-4 form-control-label" style="text-align: right">Sure Name</label>
+              <div class="col-sm-8">
+                <input type="text" id="sure_name" name="sure_name" class="form-control"  required>
+              </div>
+            </div>
+      <!--   User ID  -->
+            <div class="form-group row">
+              <label class="col-sm-4 form-control-label" style="text-align: right">User ID</label>
+              <div class="col-sm-8">
+                <input type="text" id="user_id" name="user_id" class="form-control"  required>
+              </div>
+            </div>
+      <!--  Password  -->
+            <div class="form-group row">
+              <label class="col-sm-4 form-control-label" style="text-align: right">Password</label>
+              <div class="col-sm-8">
+                <input type="text" id="password" name="password" class="form-control"  required>
+              </div>
+            </div>
+      <!--  Phone Number  -->
+            <div class="form-group row">
+              <label class="col-sm-4 form-control-label" style="text-align: right">Phone Number</label>
+              <div class="col-sm-8">
+                <input type="text" id="phone_number" name="phone_number" class="form-control"  required>
+              </div>
+            </div>
+      <!--  Status -->
+            <div class="form-group row">
+              <label class="col-sm-4 form-control-label" style="text-align: right">User Status</label>
+              <div class="col-sm-8">
+                <select required name="status" id="status" style="background-color: rgb(72,87,103);" class="form-control c-select">
+                    <option value="enable">Enable</option>
+                    <option value="disable">Disable</option>
+                </select>
+              </div>
+            </div>
+      <!--  Expire Date -->
+            <div class="form-group row">
+                <label class="col-sm-4 form-control-label" style="text-align: right">Expire Date</label>
+                <div class="col-sm-8">
+                    <div class="form-group">
+                                                        <div class='input-group date' ui-jp="datetimepicker" ui-options="{
+                                                            format: 'YYYY-M-D',
+                                                                icons: {
+                                                                    time: 'fa fa-clock-o',
+                                                                    date: 'fa fa-calendar',
+                                                                    up: 'fa fa-chevron-up',
+                                                                    down: 'fa fa-chevron-down',
+                                                                    previous: 'fa fa-chevron-left',
+                                                                    next: 'fa fa-chevron-right',
+                                                                    today: 'fa fa-screenshot',
+                                                                    clear: 'fa fa-trash',
+                                                                    close: 'fa fa-remove'
+                                                                }
+                                                        }">
+                                                            <input type='text' class="form-control" name="expire_date" id="expire_date" required>
+                                                            <span class="input-group-addon">
+                                                                <span class="fa fa-calendar"></span>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                </div>
+            </div>
+      <!--  IB TWS ID  -->
+            <div class="form-group row">
+              <label class="col-sm-4 form-control-label" style="text-align: right">TWS User Name</label>
+              <div class="col-sm-8">
+                <input type="text" id="ib_user_name" name="ib_user_name" class="form-control"  required>
+              </div>
+            </div>
+      <!--   API Master ID  -->
+            <div class="form-group row">
+              <label class="col-sm-4 form-control-label m-m" style="text-align: right">TWS API ID</label>
+              <div class="col-sm-8">
+                <input type="text" id="ib_id" name="ib_id" class="form-control"  required>
+              </div>
+            </div>
+      <!--  Port Number  -->
+            <div class="form-group row">
+              <label class="col-sm-4 form-control-label" style="text-align: right">Port Number</label>
+              <div class="col-sm-8">
+                <input type="text" id="ib_port" name="ib_port" class="form-control"  required>
+              </div>
+            </div>
+      <!--  Saxo Token  -->
+            <div class="form-group row">
+              <label class="col-sm-4 form-control-label" style="text-align: right">Saxo Token</label>
+              <div class="col-sm-8">
+                  <textarea id="saxo_token" name="saxo_token" rows="5" class="form-control"></textarea>
+              </div>
+            </div>
+      <!--  Button  -->
+            <div class="modal-footer">
+              {% comment %}<button type="button" class="btn white p-x-md" style="background-color: #2e3e4e" data-dismiss="modal">Cancel</button>{% endcomment %}
+              <button type="submit" class="btn white p-x-md" style="background-color: #2e3e4e" >Add</button>
+
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- / .modal -->
+
+<!-- ############ PAGE END-->
+
+    </div>
+  </div>
+  <!-- ############ Modal Start #############-->
+
+  {% comment %}<div id="create_order" class="modal black-overlay" data-backdrop="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content box-shadow-md black lt m-b">
+        <div class="modal-header">
+      	  <h5 class="modal-title">Create Order</h5>
+        </div>
+        <div class="modal-body p-lg">
+          <form action="{% url 'create_order' %}" method="post">{% csrf_token %}
+            <input type="hidden" name="create_account_id" id="create_account_id" value=""/>
+            <input type="hidden" name="create_symbol" id="create_symbol" value=""/>
+      <!--  Order Type  -->
+            <div class="form-group row">
+              <label class="col-sm-3 form-control-label m-m" style="text-align: right">Order Type</label>
+              <div class="col-sm-9">
+                <select required name="order_type" id="order_type" onchange="" style="background-color: rgb(72,87,103);" class="form-control c-select m-m">
+                    <option value="market">Market Order</option>
+                    <option value="limit">Limit Order</option>
+                </select>
+              </div>
+            </div>
+      <!--  Order Side  -->
+            <div class="form-group row">
+              <label class="col-sm-3 form-control-label m-m" style="text-align: right">Order Side</label>
+              <div class="col-sm-9">
+                <select required name="order_side" id="order_side" onchange="" style="background-color: rgb(72,87,103);" class="form-control c-select m-m">
+                    <option value="Buy">Buy</option>
+                    <option value="Sell">Sell</option>
+                </select>
+              </div>
+            </div>
+      <!--  Order Quantity  -->
+            <div class="form-group row">
+              <label class="col-sm-3 form-control-label" style="text-align: right">Order Quantity</label>
+              <div class="col-sm-9">
+                <input type="text" name="order_quantity" class="form-control"  required>
+              </div>
+            </div>
+      <!--  API Secret  -->
+            <div class="form-group row">
+              <label class="col-sm-3 form-control-label" style="text-align: right">Price</label>
+              <div class="col-sm-9">
+                <input type="text" name="order_price" class="form-control"  required>
+              </div>
+            </div>
+      <!--  Button  -->
+            <div class="modal-footer">
+              <button type="button" class="btn white p-x-md" style="background-color: #2e3e4e" data-dismiss="modal">Cancel</button>
+              <button type="submit" class="btn white p-x-md" style="background-color: #2e3e4e" >Create Order</button>
+
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>{% endcomment %}
+
+      <!-- ############ Modal END-->
+  </div>
+
+<!-- build:js scripts/app.html.js -->
+<!-- jQuery -->
+  <script src="{% static 'user/libs/jquery/jquery/dist/jquery.js' %}"></script>
+<!-- Bootstrap -->
+  <script src="{% static 'user/libs/jquery/tether/dist/js/tether.min.js' %}"></script>
+  <script src="{% static 'user/libs/jquery/bootstrap/dist/js/bootstrap.js' %}"></script>
+<!-- core -->
+  <script src="{% static 'user/libs/jquery/underscore/underscore-min.js' %}"></script>
+  <script src="{% static 'user/libs/jquery/jQuery-Storage-API/jquery.storageapi.min.js' %}"></script>
+  <script src="{% static 'user/libs/jquery/PACE/pace.min.js' %}"></script>
+
+  <script src="{% static 'user/scripts/config.lazyload.js' %}"></script>
+
+  <script src="{% static 'user/scripts/palette.js' %}"></script>
+  <script src="{% static 'user/scripts/ui-load.js' %}"></script>
+  <script src="{% static 'user/scripts/ui-jp.js' %}"></script>
+  <script src="{% static 'user/scripts/ui-include.js' %}"></script>
+  <script src="{% static 'user/scripts/ui-device.js' %}"></script>
+  <script src="{% static 'user/scripts/ui-form.js' %}"></script>
+  <script src="{% static 'user/scripts/ui-nav.js' %}"></script>
+  <script src="{% static 'user/scripts/ui-screenfull.js' %}"></script>
+  <script src="{% static 'user/scripts/ui-scroll-to.js' %}"></script>
+  <script src="{% static 'user/scripts/ui-toggle-class.js' %}"></script>
+
+  <script src="{% static 'user/scripts/app.js' %}"></script>
+
+  <!-- ajax -->
+  <script src="{% static 'user/libs/jquery/jquery-pjax/jquery.pjax.js' %}"></script>
+  <script src="{% static 'user/scripts/ajax.js' %}"></script>
+<!-- endbuild -->
+
+  <script src="https://code.highcharts.com/stock/highstock.js"></script>
+  <script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
+  <script src="https://code.highcharts.com/stock/modules/export-data.js"></script>
+<script>
+    $(document).ready(function(){
+        $('#saxo_account_update').on("click", function(e){
+            e.preventDefault();
+            var token = $('#saxo_token').val();
+            var account_key = $('#saxo_account_key').val();
+            var csrf_token = $('input[name=csrfmiddlewaretoken]').val();
+            $.ajax({
+                method: "POST",
+                url: "/account_info_update/saxo",
+                data: {token: token, account_key: account_key, csrfmiddlewaretoken: csrf_token},
+                success: function (result) {
+                    location.reload();
+                }
+            });
+        });
+    });
+</script>
+
+ <script type="text/javascript">
+function edit_user(id)   {
+    var csrf_token = $('input[name=csrfmiddlewaretoken]').val();
+    $.ajax({
+        method: "POST",
+        url: "/get_user_info/",
+        data: {id: id, csrfmiddlewaretoken: csrf_token},
+        success: function (result) {
+            $('#edit_id').val(result.user['id']);
+            $('#edit_sure_name').val(result.user['sure_name']);
+            $('#edit_user_id').val(result.user['user_id']);
+            $('#edit_password').val(result.user['password']);
+            $('#edit_phone_number').val(result.user['phone_number']);
+            $('#edit_status').val(result.user['status']);
+            $('#edit_expire_date').val(result.user['expire_date']);
+            $('#edit_saxo_token').val(result.user['saxo_token']);
+            $('#edit_ib_user_name').val(result.user['ib_user_name']);
+            $('#edit_ib_id').val(result.user['ib_id']);
+            $('#edit_ib_port').val(result.user['ib_port']);
+            $('#edit_user').show();
+        }
+    });
+}
+</script></body>
+</html>
