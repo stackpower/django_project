@@ -140,5 +140,5 @@ option_url = "https://sandbox.iexapis.com/stable/stock/{}/options/{}?token=Tsk_e
 history_url = "https://sandbox.iexapis.com/stable/stock/{}/chart/2y?token=Tsk_e5eecc7b63fb49ceb1c82defda59c396"
 
 APIS = {
-    'polygon': 'https://api.polygon.io/v2/aggs/ticker/{}/range/1/day/{}/{}?adjusted=true&sort=asc&limit={}&apiKey=5nFgKqNZrwdYWbpfvFC4AJPmofpCeMgj'
+    'polygon': 'https://api.polygon.io/v2/aggs/ticker/{}/range/1/day/{}/{}?adjusted=true&sort=asc&apiKey=lG4pspHmpiW2gNm3sWdHrJ31T5b7HZav'
 }

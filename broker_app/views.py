@@ -105,8 +105,8 @@ class data_model:
             await asyncio.wait([self.check_straddle_spread(symbol, trading_day, expire_list) for symbol in self.symbol_list])
             #print(self.strategy)
 
-    def fetch_data_from_polygon(self, symbol , date_from, date_to, limit):
-        api_url = settings.APIS['polygon'].format(symbol, date_from, date_to, limit)
+    def fetch_data_from_polygon(self, symbol , date_from, date_to):
+        api_url = settings.APIS['polygon'].format(symbol, date_from, date_to)
         result = requests.get(api_url).json()
         result = result['results']
         result = result[max(len(result) - self.rest_date - self.security['data_size'], 0):]
@@ -135,9 +135,10 @@ class data_model:
         long_temp = []
         short_temp = []
 
-        today = datetime.datetime.now()
-        limit = self.rest_date + self.security['data_size'] + 1
-        result = self.fetch_data_from_polygon(symbol, '1900-01-01', today.strftime('%Y-%m-%d'), limit)
+        delta = int(7.0 / 5 * self.security['data_size']) + 20
+        from_date = datetime.datetime.fromisoformat(self.security['trading_day']) - datetime.timedelta(days = int(delta))
+        to_date = datetime.datetime.now()
+        result = self.fetch_data_from_polygon(symbol, from_date.strftime('%Y-%m-%d'), to_date.strftime('%Y-%m-%d'))
         
         self.history_data[symbol] = result
         open_data = result['open']
