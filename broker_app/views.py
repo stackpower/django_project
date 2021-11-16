@@ -71,7 +71,8 @@ class data_model:
         # self.history_data = pdr.get_data_yahoo(self.symbol_list, start=start_date, end=datetime.datetime.today())
 
         if self.security['type'] == "STOCK":
-            await asyncio.wait([self.get_iex_history_data(item) for item in self.symbol_list])
+            #await asyncio.wait([self.get_iex_history_data(item) for item in self.symbol_list])
+            await asyncio.wait([self.get_iex_history_data_polygon(item) for item in self.symbol_list])
 
             for i in range(len(self.sma_data)):
                 bbb = []
@@ -104,6 +105,148 @@ class data_model:
             await asyncio.wait([self.check_straddle_spread(symbol, trading_day, expire_list) for symbol in self.symbol_list])
             #print(self.strategy)
 
+    def fetch_data_from_polygon(self, symbol , date_from, date_to, limit):
+        api_url = settings.APIS['polygon'].format(symbol, date_from, date_to, limit)
+        result = requests.get(api_url).json()
+        result = result['results']
+        result = result[max(len(result) - self.rest_date - self.security['data_size'], 0):]
+        open_data = []
+        high_data = []
+        low_data = []
+        close_data = []
+        date_data = []
+        for item in result:
+            date_time = datetime.datetime.fromtimestamp(int(item['t']) / 1000)
+            date_data.append(date_time.strftime('%Y-%m-%d'))
+            high_data.append(item['h'])
+            low_data.append(item['l'])
+            close_data.append(item['c'])
+            open_data.append(item['o'])
+        return {"open": open_data, "high": high_data, "low": low_data, "close": close_data, "date": date_data}
+
+    async def get_iex_history_data_polygon(self, symbol):
+        high_list = []
+        low_list = []
+        close_list = []
+        high_temp = []
+        low_temp = []
+        short_data = []
+        long_data = []
+        long_temp = []
+        short_temp = []
+
+        today = datetime.datetime.now()
+        limit = self.rest_date + self.security['data_size'] + 1
+        result = self.fetch_data_from_polygon(symbol, '1900-01-01', today.strftime('%Y-%m-%d'), limit)
+        
+        self.history_data[symbol] = result
+        open_data = result['open']
+        high_data = result['high']
+        low_data = result['low']
+        close_data = result['close']
+        date_data = result['date']
+        self.index_list = date_data
+        for i in range(self.rest_date, self.rest_date + self.security['data_size'] + 1):
+            high_list.append(max([high_data[j] for j in range(i - self.rest_date, i)]))
+            low_list.append(min([low_data[j] for j in range(i - self.rest_date, i)]))
+            close_list.append(min([close_data[j] for j in range(i - self.rest_date, i)]))
+        ############# temp for long short data ##################
+        for i in range(self.rest_date, self.rest_date + self.security['data_size']):
+            high_temp.append(max([high_data[j] for j in range(i - self.rest_date, i + 1)]))
+            low_temp.append(min([low_data[j] for j in range(i - self.rest_date, i + 1)]))
+        self.long_short_temp.append({
+            "symbol": symbol,
+            "high": high_temp,
+            "low": low_temp,
+            "close": close_data
+        })
+
+        if self.rest_date > 0:
+            data = {
+                #"Open": list(tulipy.sma(np.array(open_data), self.rest_date)),
+                "Open": [item for item in pandas_ta.sma(close=pd.DataFrame({"open": open_data})['open'], length=self.rest_date).values.tolist() if str(item) != "nan"],
+                "High": high_list,
+                "Low": low_list,
+                "Close": close_list
+            }
+            # print("o data end time", datetime.datetime.now())
+        else:
+            data = {
+                "Open": open_data,
+                "High": high_data,
+                "Low":  low_data,
+                "Close": close_data
+            }
+        self.bar_data.append({
+            "symbol": symbol,
+            "data": data
+        })
+        self.sma_data.append({
+            "symbol": symbol,
+            "data": data['Close']
+        })
+
+        self.last_price[symbol] = close_data[-1]#self.history_data[symbol][-1]['close']
+
+        ######################### Long/Short Data ####################
+        for i in range(len(high_temp)):
+            long = abs(float(close_data[i + self.rest_date]) - float(close_data[i]))
+            short = max(abs(float(high_temp[i]) - float(close_data[i])), abs(float(low_temp[i]) - float(close_data[i])), long)
+            long_data.append(round(long, 4))
+            short_data.append(round(short, 4))
+        self.long_short_data.append({
+            "symbol": symbol,
+            "data": {
+                "short": short_data,
+                "long": long_data
+            }
+        })
+        ######################### ATR Data Calculation ######################
+        short_min = min(short_data)
+        short_max = max(short_data)
+        long_min = min(long_data)
+        long_max = max(long_data)
+        short_price_unit = (short_max - short_min) / 90
+        long_price_unit = (long_max - long_min) / 90
+        short_last = short_data[-1] or 0.0
+        long_last = long_data[-1] or 0.0
+        try:
+            if short_last == short_max:
+                short_percent = 95
+            else:
+                short_percent = (short_last - short_min) / (short_max - short_min) * 90 + 5
+        except:
+            short_percent = 5.0
+        try:
+            if long_last == long_max:
+                long_percent = 95
+            else:
+                long_percent = (long_last - long_min) / (long_max - long_min) * 90 + 5
+        except:
+            long_percent = 5.0
+
+        short_temp.append(short_percent)
+        long_temp.append(long_percent)
+        self.atr_data.append({
+            "symbol": symbol,
+            "short": {
+                "max": short_max,
+                "min": short_min,
+                "price_percent": float(format(short_price_unit, '.4f')),
+                "last": short_last,
+                "last_percent": float(format(short_percent, '.4f')),
+
+            },
+            "long": {
+                "max": long_max,
+                "min": long_min,
+                "price_percent": float(format(long_price_unit, '.4f')),
+                "last": long_last,
+                "last_percent": float(format(long_percent, '.4f'))
+            },
+            "last_price": close_data[-1]#float(format(self.last_price.get(item['symbol']), '.4f'))
+        })
+ 
     async def get_iex_history_data(self, symbol):
         high_data = []
         low_data = []

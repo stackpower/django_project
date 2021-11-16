@@ -123,7 +123,6 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
-STATIC_ROOT = os.path.join(BASE_DIR,'static')
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static',),)
 
@@ -139,3 +138,7 @@ IEX_TOKEN = "pk_c0b65978be214f7f8b9df7f24a1d025e"
 
 option_url = "https://sandbox.iexapis.com/stable/stock/{}/options/{}?token=Tsk_e5eecc7b63fb49ceb1c82defda59c396"
 history_url = "https://sandbox.iexapis.com/stable/stock/{}/chart/2y?token=Tsk_e5eecc7b63fb49ceb1c82defda59c396"
+
+APIS = {
+    'polygon': 'https://api.polygon.io/v2/aggs/ticker/{}/range/1/day/{}/{}?adjusted=true&sort=asc&limit={}&apiKey=5nFgKqNZrwdYWbpfvFC4AJPmofpCeMgj'
+}
