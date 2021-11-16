@@ -138,6 +138,10 @@ class data_model:
         delta = int(7.0 / 5 * self.security['data_size']) + 20
         from_date = datetime.datetime.fromisoformat(str(self.security['trading_day'])) - datetime.timedelta(days = int(delta))
         to_date = datetime.datetime.now(datetime.timezone.utc)
+        print("=========================")
+        print(from_date)
+        print(to_date)
+        print(symbol)
         result = self.fetch_data_from_polygon(symbol, from_date.strftime('%Y-%m-%d'), to_date.strftime('%Y-%m-%d'))
         
         self.history_data[symbol] = result
