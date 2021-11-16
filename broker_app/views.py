@@ -135,8 +135,8 @@ class data_model:
         long_temp = []
         short_temp = []
 
-        delta = int(7.0 / 5 * self.security['data_size']) + 20
-        from_date = datetime.datetime.fromisoformat(str(self.security['trading_day'])) - datetime.timedelta(days = int(delta))
+        delta = int(2 * (self.security['data_size'] + self.rest_date)) + 20
+        from_date = datetime.datetime.now(datetime.timezone.utc) - datetime.timedelta(days = int(delta))
         to_date = datetime.datetime.now(datetime.timezone.utc)
         print("=========================")
         print(from_date)
