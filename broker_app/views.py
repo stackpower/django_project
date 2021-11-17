@@ -3621,6 +3621,10 @@ def get_movement_chart(request):
             delta = int(2 * 20) + 20
             from_date = datetime.datetime.now(datetime.timezone.utc) - datetime.timedelta(days = int(delta))
             to_date = datetime.datetime.now(datetime.timezone.utc)
+            print("====================7days")
+            print(ticker)
+            print(from_date)
+            print(to_date)
 
             api_url = settings.APIS['polygon'].format(ticker, from_date, to_date)
             result = requests.get(api_url).json()
@@ -3637,6 +3641,7 @@ def get_movement_chart(request):
                 low_data.append(item['l'])
                 close_data.append(item['c'])
                 open_data.append(item['o'])
+            print("=======ok=====")
             #print(history_data)
             #column_list = [item for item in history_data]
             #print(column_list)
