@@ -3618,7 +3618,7 @@ def get_movement_chart(request):
             #     close_data.append(item['close'])
             #     index_list.append(item['date'])
 
-            delta = 100
+            delta = 30
             from_date = datetime.datetime.now(datetime.timezone.utc) - datetime.timedelta(days = int(delta))
             to_date = datetime.datetime.now(datetime.timezone.utc)
             print("====================7days")
@@ -3633,10 +3633,10 @@ def get_movement_chart(request):
             high_data = []
             low_data = []
             close_data = []
-            date_data = []
+            index_list = []
             for item in result:
                 date_time = datetime.datetime.fromtimestamp(int(item['t']) / 1000)
-                date_data.append(date_time.strftime('%Y-%m-%d'))
+                index_list.append(date_time.strftime('%Y-%m-%d'))
                 high_data.append(item['h'])
                 low_data.append(item['l'])
                 close_data.append(item['c'])
