@@ -3618,7 +3618,7 @@ def get_movement_chart(request):
             #     close_data.append(item['close'])
             #     index_list.append(item['date'])
 
-            delta = int(2 * 20) + 20
+            delta = 40
             from_date = datetime.datetime.now(datetime.timezone.utc) - datetime.timedelta(days = int(delta))
             to_date = datetime.datetime.now(datetime.timezone.utc)
             print("====================7days")
@@ -3626,7 +3626,7 @@ def get_movement_chart(request):
             print(from_date)
             print(to_date)
 
-            api_url = settings.APIS['polygon'].format(ticker, from_date, to_date)
+            api_url = settings.APIS['polygon'].format(ticker, from_date.strftime('%Y-%m-%d'), to_date.strftime('%Y-%m-%d'))
             result = requests.get(api_url).json()
             print(result)
             result = result['results']
