@@ -3610,13 +3610,33 @@ def get_movement_chart(request):
             low_data = history_data['Low'].values
             close_data = history_data['Close'].values
             '''
-            history_temp = requests.get("https://sandbox.iexapis.com/stable/stock/{}/chart/5y?token=Tsk_e5eecc7b63fb49ceb1c82defda59c396".format(ticker)).json()
-            for item in history_temp:
-                open_data.append(item['open'])
-                high_data.append(item['high'])
-                low_data.append(item['low'])
-                close_data.append(item['close'])
-                index_list.append(item['date'])
+            # history_temp = requests.get("https://sandbox.iexapis.com/stable/stock/{}/chart/5y?token=Tsk_e5eecc7b63fb49ceb1c82defda59c396".format(ticker)).json()
+            # for item in history_temp:
+            #     open_data.append(item['open'])
+            #     high_data.append(item['high'])
+            #     low_data.append(item['low'])
+            #     close_data.append(item['close'])
+            #     index_list.append(item['date'])
+
+            delta = int(2 * 20) + 20
+            from_date = datetime.datetime.now(datetime.timezone.utc) - datetime.timedelta(days = int(delta))
+            to_date = datetime.datetime.now(datetime.timezone.utc)
+
+            api_url = settings.APIS['polygon'].format(ticker, from_date, to_date)
+            result = requests.get(api_url).json()
+            result = result['results']
+            open_data = []
+            high_data = []
+            low_data = []
+            close_data = []
+            date_data = []
+            for item in result:
+                date_time = datetime.datetime.fromtimestamp(int(item['t']) / 1000)
+                date_data.append(date_time.strftime('%Y-%m-%d'))
+                high_data.append(item['h'])
+                low_data.append(item['l'])
+                close_data.append(item['c'])
+                open_data.append(item['o'])
             #print(history_data)
             #column_list = [item for item in history_data]
             #print(column_list)
