@@ -3628,6 +3628,7 @@ def get_movement_chart(request):
 
             api_url = settings.APIS['polygon'].format(ticker, from_date, to_date)
             result = requests.get(api_url).json()
+            print(result)
             result = result['results']
             open_data = []
             high_data = []
